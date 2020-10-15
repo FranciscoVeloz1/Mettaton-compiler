@@ -40,14 +40,15 @@ body {
     font-size: 18px;
     font-family: 'Roboto Mono', monospace;
     height: 70vh;
-    width: 95%;
+    width: 97%;
     border: black;
 }
 
 .lineas {
     font-size: 18px;
     font-family: 'Roboto Mono', monospace;
-    width: 5%;
+    color: blue;
+    width: 3%;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
