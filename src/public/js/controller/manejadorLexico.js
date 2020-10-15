@@ -4,11 +4,12 @@ class Manejador {
         this.token = tok
         this.descripcion = des
         this.linea = lin
-        this.arreglo = []
+        this.token = []
+        this.coleccion = []
     }
 
     Separar(palabra) {
-        this.arreglo = palabra.split("\n")
+        this.token = palabra.split("\n")
     }
 
     Mostrar() {
@@ -20,6 +21,13 @@ class Manejador {
             <td> ${this.linea} </td>
         </tr>`
     }
+
+    Generar() {
+        for (let i = 0; i < this.token.length; i++) {
+            this.coleccion.push(new Manejador(i + 1, this.token[i], "descripcion", i + 1))
+        }
+    }
+
 }
 
 export default Manejador
