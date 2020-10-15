@@ -1,29 +1,12 @@
-
-<table class="table table-bordered table-hover">
-
-    <thead>
+<table class="table table-bordered table-hover tabla">
+    <thead class="thead-dark">
         <tr>
-            <td>n°</td>
-            <td>Nombre</td>
-            <td>Descripcion</td>
-            <td>Actions</td>
+            <th scope="col">#</th>
+            <th scope="col">Token</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Linea</th>
         </tr>
     </thead>
-
-    <tbody>
-        <% if (data) { %>
-        <% for(let i = 0; i < data.length; i++) { %>
-        <tr>
-            <td><%= (i + 1) %></td>
-            <td><%= data[i].name %></td>
-            <td><%= data[i].description %></td>
-            <td>
-                <a href="/update/<%= data[i].id %>" class="btn btn-info">Edit</a>
-                <a href="/delete/<%= data[i].id %>" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-        <% } %>
-        <% } %>
+    <tbody id="resultado">
     </tbody>
-
 </table>
