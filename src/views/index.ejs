@@ -3,11 +3,14 @@
 <div class="contenedor">
 
     <div class="contenedor__menu">
-        <%-include ('components/menu.ejs') %>  
+        <%-include ('components/menu.ejs') %>
     </div>
 
     <div class="contenedor__form">
-        <%-include ('components/form.ejs') %>
+        <div class="contenedor">
+            <%-include ('components/lineas.ejs') %>
+            <%-include ('components/form.ejs') %>
+        </div>
         <%-include ('components/table.ejs') %>
     </div>
 

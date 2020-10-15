@@ -10,6 +10,7 @@ body {
 
 .contenedor {
     margin: auto;
+    width: 100%;
     display: flex;
     justify-content: flex-start;
 }
@@ -39,25 +40,29 @@ body {
     font-size: 18px;
     font-family: 'Roboto Mono', monospace;
     height: 70vh;
-    width: 100%;
+    width: 95%;
     border: black;
 }
 
 .lineas {
     font-size: 18px;
     font-family: 'Roboto Mono', monospace;
-    width: 20%;
+    width: 5%;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     text-align: end;
-    border: 1px solid black;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
 .menu {
     width: 100%;
     height: 100%;
-    background-color:gainsboro;
+    background-color:ghostwhite;
+    color: black;
 }
 
 .tabla {
@@ -69,12 +74,12 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #2E2E2E;
-    height: 100px;
+    height: 80px;
     width: 100%;
 }
 
 .pie p {
     color: white;
     font-size: 20px;
-    text-decoration: none;
+    margin: 0;
 }
