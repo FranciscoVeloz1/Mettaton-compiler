@@ -13,7 +13,6 @@ btnSeparar.addEventListener('click', () => {
 
     for (let i = 0; i < manejador.arreglo.length; i++) {
         coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "descripcion", i + 1))
-
         document.getElementById("resultado").innerHTML += coleccion[i].Mostrar()
     }
 })
