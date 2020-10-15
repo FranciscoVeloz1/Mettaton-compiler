@@ -1,0 +1,25 @@
+<%-include ('components/header.ejs') %>
+
+<div class="contenedor__form">
+    <div class="card" style="width: 24rem;">
+        <div class="card-header">
+            <p class="titulo">Actualizar</p>
+        </div>
+
+        <div class="card-body">
+
+            <form action="/update/<%= data.id %>" method="POST">
+
+                <div class="form-group">
+                    <input type="date" name="fecha" value="<%= data.campo %>" class="form-control">
+                </div>
+
+                <div class="contenedor__form">
+                    <button type="submit" id="" class="btn btn-primary">Actualizar</button>
+                </div>
+                
+            </form>
+
+        </div>
+    </div>
+</div>
