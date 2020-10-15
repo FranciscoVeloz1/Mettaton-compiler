@@ -1,3 +1,41 @@
-<%-include ('components/_header.ejs') %>
+<%-include ('components/header.ejs') %>
 
-<%-include ('components/_footer.ejs') %>
+<div class="contenedor">
+    <div class="contenedor__form">
+        <div class="card" style="width: 24rem;">
+            <div class="card-header">
+                <p class="titulo">Analizador lexico</p>
+            </div>
+
+            <div class="card-body">
+                <div class="form-group">
+                    <textarea type="text" id="txtArea" style="height: 350px;" class="form-control" autofocus></textarea>
+                </div>
+
+                <div class="contenedor__form">
+                    <button type="submit" id="btnSeparar" class="btn btn-primary">Separar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor__form">
+
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Token</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Linea</th>
+                </tr>
+            </thead>
+            <tbody id="resultado">
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<%-include ('components/footer.ejs') %>

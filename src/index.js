@@ -3,7 +3,7 @@ const express = require('express')
 const path = require('path')
 
 //Importing routes
-//Example const cardRoutes = require('./routes/cards')
+const mainRoute = require('./routes/main.js')
 
 class Server {
     constructor() {
@@ -20,7 +20,7 @@ class Server {
     }
 
     Routes() {
-        this.app.use('/', Ruta)
+        this.app.use('/', mainRoute)
     }
 
     StaticFiles() {

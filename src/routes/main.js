@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const template = require('../controllers/templateController.js')
+const template = require('../controllers/mainController.js')
 
 class IndexRouter {
     constructor() {
