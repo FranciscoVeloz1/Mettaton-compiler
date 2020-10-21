@@ -5,7 +5,7 @@ const btnSeparar = document.getElementById("btnSeparar")
 
 const manejador = new Manejador()
 
-var patronComprobacion = /[A-Z]* > [0-9]\d*/ || /[A-Z]* < [0-9]\d*/
+var patronComprobacion = /[A-Z]* [<||>||==] [0-9]*/
 
 let coleccion = []
 
@@ -33,13 +33,10 @@ btnSeparar.addEventListener('click', () => {
 
 
 function ComprobarComparacion(tokens) {
-    let comparacion = tokens.match(patronComprobacion)
+    let comparacion = patronComprobacion.test(tokens)
     let r
-    if (comparacion != null) {
+    if (comparacion != false) {
         r = true
-    }
-    else if (comparacion == null) {
-        r = false
     }
     return r
 }
