@@ -11,7 +11,7 @@ class Manejador
 
     Separar(palabra)
     {
-        this.arreglo = palabra.split(/[\n\s ]+/)
+        this.arreglo = palabra.split('\n')
     }
 
     Mostrar()
