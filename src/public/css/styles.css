@@ -5,7 +5,7 @@
 }
 
 body {
-    font-size: 25px;
+    font-size: 18px;
 }
 
 .contenedor {
@@ -32,12 +32,12 @@ body {
     justify-content: center;
     margin-top: 20px;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 20px;
     color: #2e2e2e;
 }
 
 .formulario {
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Roboto Mono', monospace;
     height: 70vh;
     width: 97%;
@@ -45,7 +45,7 @@ body {
 }
 
 .lineas {
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Roboto Mono', monospace;
     color: blue;
     width: 3%;
