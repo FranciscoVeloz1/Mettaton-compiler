@@ -18,8 +18,8 @@ const patronWhile = /^\s*while[(\w*)]+$/
 const patronFor = /^\s*for[(\w*)]+$/
 const patronFunction = /^\s*function \w*[(\w*)]+$/
 const patronTiempo = /^\s*wait1msec[(\w*)]+$/
-const patronReservada = /^new|Servo|Relay|Sensor|Motor|return|PI/
-const patronMetodo = /^run|on|off/
+const patronReservada = /^\s*new|Servo|Relay|Sensor|Motor|return|PI/
+const patronMetodo = /^\s*run|on|off/
 
 let coleccion = []
 
