@@ -1,9 +1,9 @@
-import Manejador from './controller/manejadorLexico.js';
+import Controlador from './controller/controladorLexico.js';
 
 const txtArea = document.getElementById("txtArea")
 const btnSeparar = document.getElementById("btnSeparar")
 
-const manejador = new Manejador()
+const controlador = new Controlador()
 
 const patronComparacion = /^[(]\w*\s*c|<|>|==|!=|<=\s*\w*[)]+$/i
 const patronMain = /^task main+[()]+$/i
@@ -12,7 +12,14 @@ const patronLlaveFin = /^\s*}+$/i
 const patronComentario = /^\s*[//]\w*/i
 const patronCadena = /^\s*var|const \w* = '\w*'+$/i
 const patronInstancia = /^\s*var|const \w* = new \w*[(]\d*[)]+$/i
-const patronIf = /^if[()]/
+const patronIf = /^\s*if[(\w*)]+$/
+const patronElse = /^\s*else+$/
+const patronWhile = /^\s*while[(\w*)]+$/
+const patronFor = /^\s*for[(\w*)]+$/
+const patronFunction = /^\s*function \w*[(\w*)]+$/
+const patronTiempo = /^\s*wait1msec[(\w*)]+$/
+const patronReservada = /^new|Servo|Relay|Sensor|Motor|return|PI/
+const patronMetodo = /^run|on|off/
 
 let coleccion = []
 
@@ -23,106 +30,74 @@ window.onload = () => {
 }
 
 btnSeparar.addEventListener('click', () => {
-    manejador.Separar(txtArea.value)
+    controlador.Separar(txtArea.value)
 
-    for (let i = 0; i < manejador.arreglo.length; i++) {
+    for (let i = 0; i < controlador.arreglo.length; i++) {
 
-        if (ComprobarComparacion(manejador.arreglo[i]) == true) {
-            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Comparación", 1))
+        if (controlador.Comprobar(controlador.arreglo[i], patronComparacion) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Comparación", 1))
         }
 
-        else if (ComprobarMain(manejador.arreglo[i]) == true) {
-            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Metodo principal", 1))
+        else if (controlador.Comprobar(controlador.arreglo[i], patronMain) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo principal", 1))
         }
 
-        else if (ComprobarLlaveInicio(manejador.arreglo[i]) == true) {
-            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Llave inicio", 1))
+        else if (controlador.Comprobar(controlador.arreglo[i], patronLlaveInicio) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Llave inicio", 1))
         }
 
-        else if (ComprobarLlaveFin(manejador.arreglo[i]) == true) {
-            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Llave fin", 1))
+        else if (controlador.Comprobar(controlador.arreglo[i], patronLlaveFin) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Llave fin", 1))
         }
 
-        else if (ComprobarComentario(manejador.arreglo[i]) == true) {
-            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Comentario", 1))
+        else if (controlador.Comprobar(controlador.arreglo[i], patronComentario) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Comentario", 1))
         }
 
-        else if (ComprobarCadena(manejador.arreglo[i]) == true) {
-            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Cadena", 1))
+        else if (controlador.Comprobar(controlador.arreglo[i], patronCadena) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Cadena", 1))
         }
 
-        else if (ComprobarInstancia(manejador.arreglo[i]) == true) {
-            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Instancia", 1))
+        else if (controlador.Comprobar(controlador.arreglo[i], patronInstancia) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Instancia", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronIf) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Declaración if", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronElse) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Declaración else", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronWhile) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Estructura de control", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronFor) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Estructura de control", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronFunction) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Función", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronTiempo) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo tiempo", 1))
+        }
+        
+        else if (controlador.Comprobar(controlador.arreglo[i], patronReservada) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Palabra reservada", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronMetodo) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo", 1))
         }
 
         else {
-            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "No identificado", 1))
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "No identificado", 1))
         }
 
         document.getElementById("resultado").innerHTML += coleccion[i].Mostrar()
     }
 })
-
-function ComprobarMain(tokens) {
-    let comparacion = patronMain.test(tokens)
-    let r
-    if (comparacion != false) {
-        r = true
-    }
-    return r
-}
-
-function ComprobarLlaveInicio(tokens) {
-    let comparacion = patronLlaveInicio.test(tokens)
-    let r
-    if (comparacion != false) {
-        r = true
-    }
-    return r
-}
-
-function ComprobarLlaveFin(tokens) {
-    let comparacion = patronLlaveFin.test(tokens)
-    let r
-    if (comparacion != false) {
-        r = true
-    }
-    return r
-}
-
-function ComprobarComparacion(tokens) {
-    let comparacion = patronComparacion.test(tokens)
-    let r
-    if (comparacion != false) {
-        r = true
-    }
-    return r
-}
-
-function ComprobarComentario(tokens) {
-    let comparacion = patronComentario.test(tokens)
-    let r
-    if (comparacion != false) {
-        r = true
-    }
-    return r
-}
-
-
-function ComprobarCadena(tokens) {
-    let comparacion = patronCadena.test(tokens)
-    let r
-    if (comparacion != false) {
-        r = true
-    }
-    return r
-}
-
-function ComprobarInstancia(tokens) {
-    let comparacion = patronInstancia.test(tokens)
-    let r
-    if (comparacion != false) {
-        r = true
-    }
-    return r
-}
