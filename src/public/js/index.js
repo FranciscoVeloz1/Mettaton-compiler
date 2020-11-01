@@ -5,10 +5,14 @@ const btnSeparar = document.getElementById("btnSeparar")
 
 const manejador = new Manejador()
 
-var patronComparacion = /^[()]\w*\s*c|<|>|==|!=|<=\s*\w*[)]+$/i
-var patronMain = /^task main+[()]+$/i
-var patronLlaveInicio = /^{+$/i
-var patronLlaveFin = /^}+$/i
+const patronComparacion = /^[(]\w*\s*c|<|>|==|!=|<=\s*\w*[)]+$/i
+const patronMain = /^task main+[()]+$/i
+const patronLlaveInicio = /^\s*{+$/i
+const patronLlaveFin = /^\s*}+$/i
+const patronComentario = /^\s*[//]\w*/i
+const patronCadena = /^\s*var|const \w* = '\w*'+$/i
+const patronInstancia = /^\s*var|const \w* = new \w*[(]\d*[)]+$/i
+const patronIf = /^if[()]/
 
 let coleccion = []
 
@@ -37,6 +41,18 @@ btnSeparar.addEventListener('click', () => {
 
         else if (ComprobarLlaveFin(manejador.arreglo[i]) == true) {
             coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Llave fin", 1))
+        }
+
+        else if (ComprobarComentario(manejador.arreglo[i]) == true) {
+            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Comentario", 1))
+        }
+
+        else if (ComprobarCadena(manejador.arreglo[i]) == true) {
+            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Cadena", 1))
+        }
+
+        else if (ComprobarInstancia(manejador.arreglo[i]) == true) {
+            coleccion.push(new Manejador(i + 1, manejador.arreglo[i], "Instancia", 1))
         }
 
         else {
@@ -76,11 +92,35 @@ function ComprobarLlaveFin(tokens) {
 
 function ComprobarComparacion(tokens) {
     let comparacion = patronComparacion.test(tokens)
-
     let r
+    if (comparacion != false) {
+        r = true
+    }
+    return r
+}
 
-    debugger
+function ComprobarComentario(tokens) {
+    let comparacion = patronComentario.test(tokens)
+    let r
+    if (comparacion != false) {
+        r = true
+    }
+    return r
+}
 
+
+function ComprobarCadena(tokens) {
+    let comparacion = patronCadena.test(tokens)
+    let r
+    if (comparacion != false) {
+        r = true
+    }
+    return r
+}
+
+function ComprobarInstancia(tokens) {
+    let comparacion = patronInstancia.test(tokens)
+    let r
     if (comparacion != false) {
         r = true
     }
