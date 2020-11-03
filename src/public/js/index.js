@@ -1,7 +1,8 @@
-import Controlador from './controller/controladorLexico.js';
+import Controlador from './controller/controladorLexico.js'
 
 const txtArea = document.getElementById("txtArea")
 const btnSeparar = document.getElementById("btnSeparar")
+const btnLimpiar = document.getElementById("btnLimpiar")
 
 const controlador = new Controlador()
 
@@ -12,10 +13,10 @@ const patronLlaveFin = /^\s*}+$/i
 const patronComentario = /^\s*[//]\w*/i
 const patronCadena = /^\s*var|const \w* = '\w*'+$/i
 const patronInstancia = /^\s*var|const \w* = new \w*[(]\d*[)]+$/i
-const patronIf = /^\s*if[(\w*)]+$/
+const patronIf = /^\s*if[(]\w*[)]+$/
 const patronElse = /^\s*else+$/
 const patronWhile = /^\s*while[(\w*)]+$/
-const patronFor = /^\s*for[(\w*)]+$/
+const patronFor = /^\s*for[(]\w*[)]+$/
 const patronFunction = /^\s*function \w*[(\w*)]+$/
 const patronTiempo = /^\s*wait1msec[(\w*)]+$/
 const patronReservada = /^\s*new|Servo|Relay|Sensor|Motor|return|PI/
@@ -30,6 +31,7 @@ window.onload = () => {
 }
 
 btnSeparar.addEventListener('click', () => {
+
     controlador.Separar(txtArea.value)
 
     for (let i = 0; i < controlador.arreglo.length; i++) {
@@ -85,7 +87,7 @@ btnSeparar.addEventListener('click', () => {
         else if (controlador.Comprobar(controlador.arreglo[i], patronTiempo) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo tiempo", 1))
         }
-        
+
         else if (controlador.Comprobar(controlador.arreglo[i], patronReservada) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Palabra reservada", 1))
         }
@@ -99,5 +101,10 @@ btnSeparar.addEventListener('click', () => {
         }
 
         document.getElementById("resultado").innerHTML += coleccion[i].Mostrar()
+
     }
+})
+
+btnLimpiar.addEventListener('click', () => {
+    location.reload()
 })

@@ -1,0 +1,10 @@
+task main()
+{
+  //Declaracion de cadenas
+  var cadena = 'Cadena'
+
+  //Instancia de un objeto interno del compilador
+  const sensorLuz = new Sensor(8)
+
+  //Aplicacion del sensorLuz
+}

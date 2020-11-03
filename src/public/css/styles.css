@@ -66,8 +66,32 @@ body {
     color: black;
 }
 
-.tabla {
-    width: 100%;
+.my-custom-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+/* ---------------------scrollbar---------------------*/
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(190, 189, 189, 0.219);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.281);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.699);
 }
 
 .pie {
