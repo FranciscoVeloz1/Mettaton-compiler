@@ -12,15 +12,15 @@ const patronLlaveInicio = /^\s*{+$/i
 const patronLlaveFin = /^\s*}+$/i
 const patronComentario = /^\s*[//]\w*/i
 const patronCadena = /^\s*var|const \w* = '\w*'+$/i
-const patronInstancia = /^\s* var|const \w* = new \w*[(]\w*|\d*[)]+$/i
-const patronIf = /^\s*if[(]\w*[)]+$/
+const patronInstancia = /\s* var|const \w* = new \w*[(\w*|\d*)]+$/i
+const patronIf = /^\s*if[(\w*)]+$/
 const patronElse = /^\s*else+$/
 const patronWhile = /^\s*while[(\w*)]+$/
-const patronFor = /^\s*for[(]\w*[)]+$/
+const patronFor = /^\s*for[(\w*)]+$/
 const patronFunction = /^\s*function \w*[(\w*)]+$/
 const patronTiempo = /^\s*wait1msec[(\w*)]+$/
 const patronReservada = /^\s*new|Servo|Relay|Sensor|Motor|return|PI/
-const patronMetodo = /^\s*run|on|off/
+const patronMetodo = /^\s*x|on|run[(\w*|\d*)]|off|position[(\w*|\d*)]/
 
 let coleccion = []
 
@@ -60,21 +60,16 @@ btnSeparar.addEventListener('click', () => {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Declaración if", 1))
         }
 
-        else if (controlador.Comprobar(controlador.arreglo[i], patronInstancia) == true) {
-            debugger
-            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Instancia", 1))
-        }
-
-        else if (controlador.Comprobar(controlador.arreglo[i], patronElse) == true) {
-            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Declaración else", 1))
-        }
-
         else if (controlador.Comprobar(controlador.arreglo[i], patronWhile) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Estructura de control", 1))
         }
 
         else if (controlador.Comprobar(controlador.arreglo[i], patronFor) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Estructura de control", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronElse) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Declaración else", 1))
         }
 
         else if (controlador.Comprobar(controlador.arreglo[i], patronFunction) == true) {
@@ -85,16 +80,21 @@ btnSeparar.addEventListener('click', () => {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo tiempo", 1))
         }
 
-        else if (controlador.Comprobar(controlador.arreglo[i], patronReservada) == true) {
-            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Palabra reservada", 1))
+        else if (controlador.Comprobar(controlador.arreglo[i], patronComparacion) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Comparación", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronInstancia) == true) {
+            debugger
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Instancia", 1))
         }
 
         else if (controlador.Comprobar(controlador.arreglo[i], patronMetodo) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo", 1))
         }
 
-        else if (controlador.Comprobar(controlador.arreglo[i], patronComparacion) == true) {
-            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Comparación", 1))
+        else if (controlador.Comprobar(controlador.arreglo[i], patronReservada) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Palabra reservada", 1))
         }
 
         else {
