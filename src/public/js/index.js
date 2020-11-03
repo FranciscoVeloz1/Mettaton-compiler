@@ -12,7 +12,7 @@ const patronLlaveInicio = /^\s*{+$/i
 const patronLlaveFin = /^\s*}+$/i
 const patronComentario = /^\s*[//]\w*/i
 const patronCadena = /^\s*var|const \w* = '\w*'+$/i
-const patronInstancia = /^\s*var|const \w* = new \w*[(]\d*[)]+$/i
+const patronInstancia = /^\s* var|const \w* = new \w*[(]\w*|\d*[)]+$/i
 const patronIf = /^\s*if[(]\w*[)]+$/
 const patronElse = /^\s*else+$/
 const patronWhile = /^\s*while[(\w*)]+$/
@@ -36,11 +36,7 @@ btnSeparar.addEventListener('click', () => {
 
     for (let i = 0; i < controlador.arreglo.length; i++) {
 
-        if (controlador.Comprobar(controlador.arreglo[i], patronComparacion) == true) {
-            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Comparación", 1))
-        }
-
-        else if (controlador.Comprobar(controlador.arreglo[i], patronMain) == true) {
+        if (controlador.Comprobar(controlador.arreglo[i], patronMain) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo principal", 1))
         }
 
@@ -60,12 +56,13 @@ btnSeparar.addEventListener('click', () => {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Cadena", 1))
         }
 
-        else if (controlador.Comprobar(controlador.arreglo[i], patronInstancia) == true) {
-            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Instancia", 1))
-        }
-
         else if (controlador.Comprobar(controlador.arreglo[i], patronIf) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Declaración if", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronInstancia) == true) {
+            debugger
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Instancia", 1))
         }
 
         else if (controlador.Comprobar(controlador.arreglo[i], patronElse) == true) {
@@ -94,6 +91,10 @@ btnSeparar.addEventListener('click', () => {
 
         else if (controlador.Comprobar(controlador.arreglo[i], patronMetodo) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronComparacion) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Comparación", 1))
         }
 
         else {
