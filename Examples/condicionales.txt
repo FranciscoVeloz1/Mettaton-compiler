@@ -2,7 +2,7 @@
 const sensorLuz = new Sensor(A5)
 
 //Instancia de un relevador
-const rele1 = new Relay(5)  
+const relay = new Relay(2)
 
 task main()
 {

@@ -41,6 +41,7 @@ body {
     font-family: 'Roboto Mono', monospace;
     height: 70vh;
     width: 97%;
+    height: 100%;
     border: black;
 }
 
@@ -64,6 +65,15 @@ body {
     height: 100%;
     background-color:ghostwhite;
     color: black;
+}
+
+.menu__list {
+    color: black;
+}
+
+.menu__list:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .my-custom-scrollbar {

@@ -1,0 +1,11 @@
+const boton = new Sensor(A5)
+const motor1 = new Motor(5)
+
+task main()
+{
+  while(boton)
+  {
+      motor.run(255)
+  }
+  motor.run(0)
+}

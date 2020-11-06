@@ -3,6 +3,11 @@ import Controlador from './controller/controladorLexico.js'
 const txtArea = document.getElementById("txtArea")
 const btnSeparar = document.getElementById("btnSeparar")
 const btnLimpiar = document.getElementById("btnLimpiar")
+const btnCondicional = document.getElementById("Condicional")
+const btnMetodos = document.getElementById("Metodos")
+const btnEstructuras = document.getElementById("Estructuras")
+const btnFunciones = document.getElementById("Funciones")
+const btnTiempo = document.getElementById("Tiempo")
 
 const controlador = new Controlador()
 
@@ -16,11 +21,11 @@ const patronInstancia = /\s* var|const \w* = new \w*[(\w*|\d*)]+$/i
 const patronIf = /^\s*if[(\w*)]+$/
 const patronElse = /^\s*else+$/
 const patronWhile = /^\s*while[(\w*)]+$/
-const patronFor = /^\s*for[(\w*)]+$/
 const patronFunction = /^\s*function \w*[(\w*)]+$/
 const patronTiempo = /^\s*wait1msec[(\w*)]+$/
 const patronReservada = /^\s*new|Servo|Relay|Sensor|Motor|return|PI/
-const patronMetodo = /^\s*x|on|run[(\w*|\d*)]|off|position[(\w*|\d*)]/
+const patronMetodo = /^click|run|off|position|on+$/i
+const anyFunction = /^\s*\w*[(]\w\w*[)]+$/i
 
 let coleccion = []
 
@@ -64,20 +69,20 @@ btnSeparar.addEventListener('click', () => {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Estructura de control", 1))
         }
 
-        else if (controlador.Comprobar(controlador.arreglo[i], patronFor) == true) {
-            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Estructura de control", 1))
-        }
-
         else if (controlador.Comprobar(controlador.arreglo[i], patronElse) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Declaración else", 1))
+        }
+
+        else if (controlador.Comprobar(controlador.arreglo[i], patronTiempo) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo tiempo", 1))
         }
 
         else if (controlador.Comprobar(controlador.arreglo[i], patronFunction) == true) {
             coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Función", 1))
         }
 
-        else if (controlador.Comprobar(controlador.arreglo[i], patronTiempo) == true) {
-            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Metodo tiempo", 1))
+        else if (controlador.Comprobar(controlador.arreglo[i], anyFunction) == true) {
+            coleccion.push(new Controlador(i + 1, controlador.arreglo[i], "Función", 1))
         }
 
         else if (controlador.Comprobar(controlador.arreglo[i], patronComparacion) == true) {
@@ -108,4 +113,24 @@ btnSeparar.addEventListener('click', () => {
 
 btnLimpiar.addEventListener('click', () => {
     location.reload()
+})
+
+btnCondicional.addEventListener('click', () => {
+    txtArea.value = controlador.EjemploCondicionales()
+})
+
+btnMetodos.addEventListener('click', () => {
+    txtArea.value = controlador.EjemploMetodos()
+})
+
+btnEstructuras.addEventListener('click', () => {
+    txtArea.value = controlador.EjemploEstructuras()
+})
+
+btnFunciones.addEventListener('click', () => {
+    txtArea.value = controlador.EjemploFunciones()
+})
+
+btnTiempo.addEventListener('click', () => {
+    txtArea.value = controlador.EjemploTiempo()
 })
