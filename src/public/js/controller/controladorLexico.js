@@ -1,38 +1,38 @@
 class Controlador {
-    constructor(num, tok, des, lin) {
-        this.numero = num
-        this.token = tok
-        this.descripcion = des
-        this.linea = lin
-        this.arreglo = []
-    }
+  constructor(num, tok, des, lin) {
+    this.numero = num
+    this.token = tok
+    this.descripcion = des
+    this.linea = lin
+    this.arreglo = []
+  }
 
-    Separar(palabra) {
-        //this.arreglo = palabra.split(/[\n\s ]+/)
-        this.arreglo = palabra.split(/[\n]+/)
-    }
+  Separar(palabra) {
+    //this.arreglo = palabra.split(/[\n\s ]+/)
+    this.arreglo = palabra.split(/[\n]+/)
+  }
 
-    Mostrar() {
-        return `
+  Mostrar() {
+    return `
         <tr> 
             <td> ${this.numero} </td>
             <td> ${this.token} </td>
             <td> ${this.descripcion} </td>
             <td> ${this.linea} </td>
         </tr>`
-    }
+  }
 
-    Comprobar(tokens, patron) {
-        let comparacion = patron.test(tokens)
-        let r
-        if (comparacion != false) {
-            r = true
-        }
-        return r
+  Comprobar(tokens, patron) {
+    let comparacion = patron.test(tokens)
+    let r
+    if (comparacion != false) {
+      r = true
     }
+    return r
+  }
 
-    EjemploCondicionales() {
-        return `//Instancia de un objeto tipo Sensor
+  EjemploCondicionales() {
+    return `//Instancia de un objeto tipo Sensor
 const sensorLuz = new Sensor(A5)
 
 //Instancia de un relevador
@@ -55,10 +55,10 @@ task main()
     }
   }
 }`
-    }
+  }
 
-    EjemploEstructuras() {
-        return `const boton = new Sensor(A5)
+  EjemploEstructuras() {
+    return `const boton = new Sensor(A5)
 const motor1 = new Motor(5)
 
 task main()
@@ -69,10 +69,10 @@ task main()
   }
   motor.run(0)
 }`
-    }
+  }
 
-    EjemploMetodos() {
-        return `//Instancias de un sensor, motor, relevador y servo
+  EjemploMetodos() {
+    return `//Instancias de un sensor, motor, relevador y servo
 const boton = new Sensor(A5)
 const motor1 = new Motor(5)
 const relay1 = new Relay(6)
@@ -96,10 +96,10 @@ task main()
     }
   }
 }`
-    }
+  }
 
-    EjemploFunciones() {
-        return `const motor1 = new Motor(5)
+  EjemploFunciones() {
+    return `const motor1 = new Motor(5)
 const motor2 = new Motor(6)
 
 function avanzar(velocidad)
@@ -115,10 +115,10 @@ task main()
       avanzar(100)
   }
 }`
-    }
+  }
 
-    EjemploTiempo() {
-        return `const motor1 = new Motor(5)
+  EjemploTiempo() {
+    return `const motor1 = new Motor(5)
 
 task main()
 {
@@ -134,7 +134,7 @@ task main()
       wait1msec(1000)
   }
 }`
-    }
+  }
 }
 
 export default Controlador

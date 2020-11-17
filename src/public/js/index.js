@@ -8,6 +8,8 @@ const btnMetodos = document.getElementById("Metodos")
 const btnEstructuras = document.getElementById("Estructuras")
 const btnFunciones = document.getElementById("Funciones")
 const btnTiempo = document.getElementById("Tiempo")
+const btnCompilar = document.getElementById("btnCompilar")
+
 
 const controlador = new Controlador()
 
@@ -110,6 +112,37 @@ btnSeparar.addEventListener('click', () => {
 
     }
 })
+
+btnCompilar.addEventListener('click', () => {
+    if (Sintactico()) {
+        console.log('Correcto')
+    }
+    else if(Sintactico()==false) {
+        console.log('Error Sintactico: Faltante { antes del cuerpo de la tarea principal')
+    }
+    else {
+        console.log('Error Sintactico: Faltante } después del cuerpo de la tarea principal')
+    }
+})
+function Sintactico(descripcion = 'Metodo principal') {
+    let res = false
+    for (let i = 0; i < coleccion.length; i++) {
+        if (coleccion[i].descripcion == descripcion) {
+            if (coleccion[i + 1].descripcion == 'Llave inicio') {
+                if(coleccion[coleccion.length-1].descripcion == 'Llave fin'){
+                    res = true
+                }
+                else {
+                    res = null
+                }
+            }
+            else {
+                res = false
+            }
+        }
+    }
+    return res
+}
 
 btnLimpiar.addEventListener('click', () => {
     location.reload()
