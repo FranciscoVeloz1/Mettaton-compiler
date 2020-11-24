@@ -1,4 +1,5 @@
 class ControladorLexico {
+  
   constructor(num, tok, des, lin) {
     this.numero = num
     this.token = tok

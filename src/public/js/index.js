@@ -1,4 +1,5 @@
 import ControladorLexico from './controller/controladorLexico.js'
+import ControladorSintactico from './controller/controladorSintactico.js'
 import ControladorEjemplos from './controller/controladorEjemplos.js'
 
 const txtArea = document.getElementById("txtArea")
@@ -10,6 +11,7 @@ const btnTiempo = document.getElementById("Tiempo")
 const btnCompilar = document.getElementById("btnCompilar")
 
 const lexico = new ControladorLexico()
+const sintactico = new ControladorSintactico()
 const ejemplos = new ControladorEjemplos()
 
 let coleccion = []
@@ -25,43 +27,8 @@ btnCompilar.addEventListener('click', () => {
     lexico.LimpiarTabla(coleccion, "resultado")
     lexico.Separar(txtArea.value)
     lexico.AnalizadorLexico(coleccion, "resultado")
-
-    if (Sintactico()) {
-        console.log('Correcto')
-    }
-
-    else if (Sintactico() == false) {
-        console.log('Error Sintactico: Faltante { antes del cuerpo de la tarea principal')
-    }
-
-    else {
-        console.log('Error Sintactico: Faltante } después del cuerpo de la tarea principal')
-    }
+    sintactico.CondicionMetodoPrincipal(coleccion)
 })
-
-function Sintactico(descripcion = 'Metodo principal') {
-    let res = false
-    for (let i = 0; i < coleccion.length; i++) {
-
-        if (coleccion[i].descripcion == descripcion) {
-
-            if (coleccion[i + 1].descripcion == 'Llave inicio') {
-
-                if (coleccion[coleccion.length - 1].descripcion == 'Llave fin') {
-                    res = true
-                }
-                else {
-                    res = null
-                }
-            }
-
-            else {
-                res = false
-            }
-        }
-    }
-    return res
-}
 
 btnCondicional.addEventListener('click', () => {
     txtArea.value = ejemplos.EjemploCondicionales()
