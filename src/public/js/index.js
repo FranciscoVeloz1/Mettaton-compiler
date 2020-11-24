@@ -5,6 +5,7 @@ import ControladorEjemplos from './controller/controladorEjemplos.js'
 
 //Elementos del compilador
 const txtArea = document.getElementById("txtArea")
+const lblproblemas = document.getElementById("lblproblemas")
 const btnCompilar = document.getElementById("btnCompilar")
 const btnLexico = document.getElementById("btnLexico")
 const btnSintactico = document.getElementById("btnSintactico")
@@ -31,21 +32,21 @@ window.onload = () => {
 }
 
 btnSintactico.addEventListener('click', () => {
-    conIndex.OcularClase("tablaLex", "tabla_hide")
+    conIndex.OcultarClase("tablaLex", "tabla_hide")
+    conIndex.OcultarClase("proSintactico", "sintactico_show")
 })
 
 btnLexico.addEventListener('click', () => {
     conIndex.MostrarClase("tablaLex", "tabla_hide")
+    conIndex.MostrarClase("proSintactico", "sintactico_show")
 })
-
-
 
 btnCompilar.addEventListener('click', () => {
 
     lexico.LimpiarTabla(coleccion, "resultado")
     lexico.Separar(txtArea.value)
     lexico.AnalizadorLexico(coleccion, "resultado")
-    sintactico.CondicionMetodoPrincipal(coleccion)
+    sintactico.CondicionMetodoPrincipal(coleccion, lblproblemas)
 })
 
 btnCondicional.addEventListener('click', () => {

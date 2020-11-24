@@ -4,7 +4,7 @@ class ControladorIndex {
         this.elemento
     }
 
-    OcularClase(id, clase) {
+    OcultarClase(id, clase) {
         this.elemento = document.getElementById(id)
         this.elemento.classList.add(clase);
     }

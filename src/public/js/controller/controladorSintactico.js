@@ -27,17 +27,17 @@ class ControladorSintactico {
         return res
     }
 
-    CondicionMetodoPrincipal(arreglo) {
+    CondicionMetodoPrincipal(arreglo, elemento) {
         if (this.MetodoPrincipal(arreglo)) {
-            console.log('Correcto')
+            elemento.innerHTML = 'Correcto'
         }
 
         else if (this.MetodoPrincipal(arreglo) == false) {
-            console.log('Error Sintactico: Faltante { antes del cuerpo de la tarea principal')
+            elemento.innerHTML = 'Error Sintactico: Faltante { antes del cuerpo de la tarea principal'
         }
 
         else {
-            console.log('Error Sintactico: Faltante } después del cuerpo de la tarea principal')
+            elemento.innerHTML = 'Error Sintactico: Faltante } después del cuerpo de la tarea principal'
         }
     }
 }
