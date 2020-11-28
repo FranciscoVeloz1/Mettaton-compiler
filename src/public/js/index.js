@@ -32,13 +32,13 @@ window.onload = () => {
 }
 
 btnSintactico.addEventListener('click', () => {
-    conIndex.OcultarClase("tablaLex", "tabla_hide")
-    conIndex.OcultarClase("proSintactico", "sintactico_show")
+    conIndex.AñadirClase("tablaLex", "tabla_hide")
+    conIndex.AñadirClase("proSintactico", "sintactico_show")
 })
 
 btnLexico.addEventListener('click', () => {
-    conIndex.MostrarClase("tablaLex", "tabla_hide")
-    conIndex.MostrarClase("proSintactico", "sintactico_show")
+    conIndex.QuitarClase("tablaLex", "tabla_hide")
+    conIndex.QuitarClase("proSintactico", "sintactico_show")
 })
 
 btnCompilar.addEventListener('click', () => {
