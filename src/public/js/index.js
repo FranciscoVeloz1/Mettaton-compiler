@@ -55,35 +55,49 @@ btnCompilar.addEventListener('click', () => {
 })
 
 function SepararLinea() {
+    
     let newArreglo = []
     newArreglo = lexico.arreglo[1].split(/[\s]+/);
     let r
 
     if (coleccion[1].descripcion == 'Instancia') {
+
         if (newArreglo[0] == 'const' || 'var') {
 
-            if (newArreglo[1].charAt(0) != 1) {
+            for (let k = 0; k <= 9; k++) {
+                let letra = parseInt(newArreglo[1].charAt(0))
+                
+                if (letra != k) {
 
-                if (newArreglo[2] == '=') {
-
-                    if (newArreglo[3] == 'new') {
-                        r = 'correcto'
-                    }
-
-                    else {
-                        r = 'incorrecto'
+                    if (newArreglo[2] == '=') {
+    
+                        if (newArreglo[3] == 'new') {
+                            
+                            for (let j = 0; j <= 13; j++) {
+                                if (newArreglo[4] == `Motor(${j})`) {
+                                    r = 'correcto'
+                                    j = 14;
+                                }
+    
+                                else {
+                                    r = 'Puerto fuera del limite'
+                                }   
+                            }
+                        }
+    
+                        else {
+                            r = 'incorrecto'
+                        }   
                     }
                 }
-            }
-
-            else {
-                r = 'incorrecto'
+    
+                else {
+                    r = 'incorrecto'
+                    k = 10
+                }
             }
         }
-        else {
-            r = 'incorrecto'
-        }
-
+        
         return r
     }
 }
