@@ -32,22 +32,61 @@ window.onload = () => {
 }
 
 btnSintactico.addEventListener('click', () => {
-    conIndex.OcultarClase("tablaLex", "tabla_hide")
-    conIndex.OcultarClase("proSintactico", "sintactico_show")
+    conIndex.AñadirClase("tablaLex", "tabla_hide")
+    conIndex.AñadirClase("proSintactico", "sintactico_show")
 })
 
 btnLexico.addEventListener('click', () => {
-    conIndex.MostrarClase("tablaLex", "tabla_hide")
-    conIndex.MostrarClase("proSintactico", "sintactico_show")
+    conIndex.QuitarClase("tablaLex", "tabla_hide")
+    conIndex.QuitarClase("proSintactico", "sintactico_show")
 })
 
 btnCompilar.addEventListener('click', () => {
 
+    //Analisis Lexico
     lexico.LimpiarTabla(coleccion, "resultado")
     lexico.Separar(txtArea.value)
     lexico.AnalizadorLexico(coleccion, "resultado")
+
+    console.log(SepararLinea())
+
+    //Analisis sintactico
     sintactico.CondicionMetodoPrincipal(coleccion, lblproblemas)
 })
+
+function SepararLinea() {
+    let newArreglo = []
+    newArreglo = lexico.arreglo[1].split(/[\s]+/);
+    let r
+
+    if (coleccion[1].descripcion == 'Instancia') {
+        if (newArreglo[0] == 'const' || 'var') {
+
+            if (newArreglo[1].charAt(0) != 1) {
+
+                if (newArreglo[2] == '=') {
+
+                    if (newArreglo[3] == 'new') {
+                        r = 'correcto'
+                    }
+
+                    else {
+                        r = 'incorrecto'
+                    }
+                }
+            }
+
+            else {
+                r = 'incorrecto'
+            }
+        }
+        else {
+            r = 'incorrecto'
+        }
+
+        return r
+    }
+}
 
 btnCondicional.addEventListener('click', () => {
     txtArea.value = ejemplos.EjemploCondicionales()

@@ -4,12 +4,12 @@ class ControladorIndex {
         this.elemento
     }
 
-    OcultarClase(id, clase) {
+    AñadirClase(id, clase) {
         this.elemento = document.getElementById(id)
         this.elemento.classList.add(clase);
     }
 
-    MostrarClase(id, clase) {
+    QuitarClase(id, clase) {
         this.elemento = document.getElementById(id)
         this.elemento.classList.remove(clase);
     }
