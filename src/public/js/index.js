@@ -48,59 +48,11 @@ btnCompilar.addEventListener('click', () => {
     lexico.Separar(txtArea.value)
     lexico.AnalizadorLexico(coleccion, "resultado")
 
-    console.log(SepararLinea())
-
     //Analisis sintactico
     sintactico.CondicionMetodoPrincipal(coleccion, lblproblemas)
+    sintactico.SepararLinea(lexico.arreglo)
+    sintactico.SinstacticoInstancia(coleccion)
 })
-
-function SepararLinea() {
-    
-    let newArreglo = []
-    newArreglo = lexico.arreglo[1].split(/[\s]+/);
-    let r
-
-    if (coleccion[1].descripcion == 'Instancia') {
-
-        if (newArreglo[0] == 'const' || 'var') {
-
-            for (let k = 0; k <= 9; k++) {
-                let letra = parseInt(newArreglo[1].charAt(0))
-                
-                if (letra != k) {
-
-                    if (newArreglo[2] == '=') {
-    
-                        if (newArreglo[3] == 'new') {
-                            
-                            for (let j = 0; j <= 13; j++) {
-                                if (newArreglo[4] == `Motor(${j})`) {
-                                    r = 'correcto'
-                                    j = 14;
-                                }
-    
-                                else {
-                                    r = 'Puerto fuera del limite'
-                                }   
-                            }
-                        }
-    
-                        else {
-                            r = 'incorrecto'
-                        }   
-                    }
-                }
-    
-                else {
-                    r = 'incorrecto'
-                    k = 10
-                }
-            }
-        }
-        
-        return r
-    }
-}
 
 btnCondicional.addEventListener('click', () => {
     txtArea.value = ejemplos.EjemploCondicionales()
