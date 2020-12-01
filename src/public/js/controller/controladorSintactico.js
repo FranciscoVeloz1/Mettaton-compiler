@@ -1,6 +1,15 @@
 class ControladorSintactico {
     constructor() {
         this.arreglo = []
+        this.contador = 0
+        this.Reservadas = ['Sensor', 'Motor', 'Servo', 'Relay']
+        this.NA = 'Ningun problema ha sido detectado'
+        this.ErrorLlaveInicio = 'Error Sintactico: Faltante { antes del cuerpo\n'
+        this.ErrorLlaveFin = 'Error Sintactico: Faltante } después del cuerpo\n'
+        this.ErrorIdNumerico = 'Error Sintactico I-001: El identificador comienza inmediatamente después del literal numérico\n'
+        this.ErrorIgual = 'Error Sintactico I-002: Faltante = en declaración de variable\n'
+        this.ErrorNew = 'Error Sintactico I-003: Los constructores de clase deben ser invocados con new\n'
+        this.ErrorPuerto = 'Error Sintactico I-004: Redeclaración de constante\n'
     }
 
     MetodoPrincipal(arreglo) {
@@ -29,15 +38,15 @@ class ControladorSintactico {
 
     CondicionMetodoPrincipal(arreglo, elemento) {
         if (this.MetodoPrincipal(arreglo)) {
-            elemento.innerHTML = 'Correcto'
+            elemento.innerHTML += this.NA
         }
 
         else if (this.MetodoPrincipal(arreglo) == false) {
-            elemento.innerHTML = 'Error Sintactico: Faltante { antes del cuerpo de la tarea principal'
+            elemento.innerHTML = this.ErrorLlaveInicio
         }
 
         else {
-            elemento.innerHTML = 'Error Sintactico: Faltante } después del cuerpo de la tarea principal'
+            elemento.innerHTML = this.ErrorLlaveFin
         }
     }
 
@@ -47,90 +56,67 @@ class ControladorSintactico {
         }
     }
 
-    SinstacticoInstancia(arreglo) {
-        for (let i = 0; i < this.arreglo.length; i++) {
+    /*SintacticoLLaves() {
+        Hacer un contador de llaves de inicio y uno de llaves de fin..
+        Si al final ambos contadores no coinciden, quiere decir que falta una llave
+    }*/
 
+    SinstacticoInstancia(arreglo, lexico, elemento) {
+        for (let i = 0; i < lexico.length; i++) {
             if (arreglo[i].descripcion == 'Instancia') {
-                this.SintacticoVarIns(i)
-            }
-        }
-    }
 
-    SintacticoVarIns(iterador) {
+                if (this.arreglo[i][0] == 'const' || 'var') {
 
-        console.log(this.arreglo[iterador][1])
+                    if (this.arreglo[i][2] == '=') {
 
-        if (this.arreglo[iterador][0] == 'const' || 'var') {
+                        if (this.arreglo[i][3] == 'new') {
 
-            for (let k = 0; k < 10; k++) {
-                if (parseInt(this.arreglo[iterador][1].charAt(0)) != k) {
-                    console.log("asdasd")
-                }
-            }
-        }
-    }
+                            let reservado = String(this.arreglo[i][4])
 
-    SintacticoNoNumero() {
-        console.log(this.arreglo[0][1])
-        console.log(this.arreglo[1][1])
+                            for (let l = 0; l < this.Reservadas.length; l++) {
 
-        // for (let k = 0; k <= 9; k++) {
-        //     if (parseInt(this.arreglo[i][1].charAt(0)) != k) {
-        //         return true
-        //     }
-        // }
+                                for (let k = 0; k <= 1; k++) {
 
+                                    let arregloReser = `${this.Reservadas[l]}(${k})`
 
-        // for (let i = 0; i < this.arreglo.length; i++) {
-        //     if (arreglo[i].descripcion == 'Instancia') {
-        //         for (let k = 0; k <= 9; k++) {
+                                    if (reservado == arregloReser) {
 
-        //             if (parseInt(this.arreglo[i][1].charAt(0)) != k) {
-        //                 return true
-        //             }
-        //         }
-        //     }
-        // }
-    }
-    /*
-    
-                    for (let k = 0; k <= 9; k++) {
-                        let letra = parseInt(newArreglo[1].charAt(0))
-    
-                        if (letra != k) {
-    
-                            if (newArreglo[2] == '=') {
-    
-                                if (newArreglo[3] == 'new') {
-    
-                                    for (let j = 0; j <= 13; j++) {
-                                        if (newArreglo[4] == `Motor(${j})`) {
-                                            r = 'correcto'
-                                            j = 14;
+                                        k = 14;
+                                        l = 5;
+
+                                        for (let j = 0; j < 10; j++) {
+                                            if (this.arreglo[i][1].charAt(0) != j) {
+                                                elemento.innerHTML = this.NA
+                                            }
+                                            else {
+                                                elemento.innerHTML = this.ErrorIdNumerico
+                                                j = 11
+                                            }
+
                                         }
-    
-                                        else {
-                                            r = 'Puerto fuera del limite'
-                                        }
+
+                                    }
+                                    else {
+                                        elemento.innerHTML = this.ErrorPuerto
+                                        i = lexico.length + 1
                                     }
                                 }
-    
-                                else {
-                                    r = 'incorrecto'
-                                }
                             }
+
                         }
-    
                         else {
-                            r = 'incorrecto'
-                            k = 10
+                            elemento.innerHTML = this.ErrorNew
                         }
+
+                    }
+                    else {
+                        elemento.innerHTML = this.ErrorIgual
                     }
                 }
-    
-                return r
             }
-        }*/
+        }
+    }
+
 }
 
 export default ControladorSintactico

@@ -12,7 +12,7 @@ class ControladorLexico {
     this.patronLlaveFin = /^\s*}+$/i
     this.patronComentario = /^\s*[//]\w*/i
     this.patronCadena = /^\s*var|const \w* = '\w*'+$/i
-    this.patronInstancia = /\s* a|var|const \w* = new \w*[(\w*|\d*)]+$/i
+    this.patronInstancia = /\s* a|var|const \w* \s*|= new \w*[(\w*|\d*)]+$/i
     this.patronIf = /^\s*if[(\w*)]+$/
     this.patronElse = /^\s*else+$/
     this.patronWhile = /^\s*while[(\w*)]+$/
