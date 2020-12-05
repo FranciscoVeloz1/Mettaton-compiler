@@ -16,7 +16,7 @@ class ControladorLexico {
     this.patronIf = /^\s*if[(\w*)]+$/
     this.patronElse = /^\s*else+$/
     this.patronWhile = /^\s*while[(\w*)]+$/
-    this.patronFunction = /^\s*function \w*[(\w*)]+$/
+    this.patronFunction = /^\s*function \w*\s*[(\w*)]+$/
     this.patronTiempo = /^\s*wait1msec[(\w*)]+$/
     this.patronReservada = /^\s*new|Servo|Relay|Sensor|Motor|return|PI/
     this.patronMetodo = /^click|run|off|position|on+$/i
@@ -98,7 +98,7 @@ class ControladorLexico {
       }
 
       else if (this.Comprobar(this.arreglo[i], this.anyFunction) == true) {
-        arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Función", 1))
+        arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Función declarada", 1))
       }
 
       else if (this.Comprobar(this.arreglo[i], this.patronComparacion) == true) {

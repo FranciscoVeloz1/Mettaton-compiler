@@ -52,7 +52,8 @@ btnCompilar.addEventListener('click', () => {
     sintactico.CondicionMetodoPrincipal(coleccion, lblproblemas)
     sintactico.SepararLinea(lexico.arreglo)
     sintactico.SinstacticoInstancia(coleccion, lexico.arreglo, lblproblemas)
-    sintactico.SintacticoVariables(coleccion, lexico.arreglo, lblproblemas)
+    //sintactico.SintacticoVariables(coleccion, lexico.arreglo, lblproblemas)
+    //sintactico.SintacticoFunciones(coleccion, lexico.arreglo, lblproblemas)
 })
 
 btnCondicional.addEventListener('click', () => {

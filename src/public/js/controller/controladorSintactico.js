@@ -2,14 +2,17 @@ class ControladorSintactico {
     constructor() {
         this.arreglo = []
         this.contador = 0
+        this.resultado = ""
         this.Reservadas = ['Sensor', 'Motor', 'Servo', 'Relay']
         this.NA = 'Ningun problema ha sido detectado'
         this.ErrorLlaveInicio = 'Error Sintactico: Faltante { antes del cuerpo\n'
         this.ErrorLlaveFin = 'Error Sintactico: Faltante } después del cuerpo\n'
-        this.ErrorIdNumerico = 'Error Sintactico I-001: El identificador comienza inmediatamente después del literal numérico\n'
+        this.ErrorIdNumerico = 'El identificador comienza inmediatamente después del literal numérico\n'
         this.ErrorIgual = 'Error Sintactico I-002: Faltante = en declaración de variable\n'
         this.ErrorNew = 'Error Sintactico I-003: Los constructores de clase deben ser invocados con new\n'
         this.ErrorPuerto = 'Error Sintactico I-004: Redeclaración de constante\n'
+        this.ErrorParInicio = 'Error Sintactico F-004: Faltante ( antes de los parámetros formales'
+        this.ErrorParFin = 'Error Sintactico F-004: Faltante ) después de parámetros formales'
     }
 
     MetodoPrincipal(arreglo) {
@@ -64,57 +67,46 @@ class ControladorSintactico {
     SinstacticoInstancia(arreglo, lexico, elemento) {
         for (let i = 0; i < lexico.length; i++) {
             if (arreglo[i].descripcion == 'Instancia') {
-
                 if (this.arreglo[i][0] == 'const') {
-
                     if (this.arreglo[i][2] == '=') {
-
                         if (this.arreglo[i][3] == 'new') {
-
                             let reservado = String(this.arreglo[i][4])
-
                             for (let l = 0; l < this.Reservadas.length; l++) {
-
                                 for (let k = 0; k <= 13; k++) {
-
                                     let arregloReser = `${this.Reservadas[l]}(${k})`
-
                                     if (reservado == arregloReser) {
 
                                         k = 14;
                                         l = 5;
-
+                                        
                                         for (let j = 0; j < 10; j++) {
                                             if (this.arreglo[i][1].charAt(0) != j) {
-                                                elemento.innerHTML = this.NA
+                                                this.resultado = "true"
                                             }
                                             else {
-                                                elemento.innerHTML = this.ErrorIdNumerico
+                                                this.resultado = `Error Sintactico I-001: ${this.ErrorIdNumerico}`
                                                 j = 11
                                             }
                                         }
-
                                     }
                                     else {
-                                        elemento.innerHTML = this.ErrorPuerto
+                                        this.resultado = this.ErrorPuerto
                                     }
                                 }
                             }
-
                         }
                         else {
-                            elemento.innerHTML = this.ErrorNew
+                            this.resultado = this.ErrorNew
                         }
-
                     }
                     else {
-                        elemento.innerHTML = this.ErrorIgual
+                        this.resultado = this.ErrorIgual
                     }
                 }
             }
         }
     }
-
+    /*
     SintacticoVariables(arreglo, lexico, elemento) {
         for (let i = 0; i < lexico.length; i++) {
             if (arreglo[i].descripcion == 'Variable') {
@@ -140,9 +132,40 @@ class ControladorSintactico {
                 }
             }
         }
-
     }
 
+    SintacticoFunciones(arreglo, lexico, elemento) {
+        for (let i = 0; i < lexico.length; i++) {
+            if (arreglo[i].descripcion == 'Función') {
+
+                if (this.arreglo[i][0] == 'function') {
+
+                    let parametros = this.arreglo[i][2]
+                    if (parametros.charAt(0) == '(') {
+                        if (parametros.charAt(parametros.length - 1) == ')') {
+
+                            for (let j = 0; j < 10; j++) {
+                                if (this.arreglo[i][1].charAt(0) != j) {
+                                    elemento.innerHTML = this.NA
+                                }
+                                else {
+                                    elemento.innerHTML = this.ErrorIdNumerico
+                                    j = 11
+                                }
+                            }
+                        }
+                        else {
+                            elemento.innerHTML = this.ErrorParFin
+                        }
+                    }
+                    else {
+                        elemento.innerHTML = this.ErrorParInicio
+                    }
+                }
+            }
+        }
+    }
+*/
 }
 
 export default ControladorSintactico
