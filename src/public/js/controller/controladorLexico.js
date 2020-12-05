@@ -74,7 +74,7 @@ class ControladorLexico {
       }
 
       else if (this.Comprobar(this.arreglo[i], this.patronCadena) == true) {
-        arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Cadena", 1))
+        arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Variable", 1))
       }
 
       else if (this.Comprobar(this.arreglo[i], this.patronIf) == true) {

@@ -30,6 +30,9 @@ task main()
 		return `const boton = new Sensor(A5)
 const motor1 = new Motor(5)
 
+var velocidad = 127
+var mensaje = 'Mensaje'
+
 task main()
 {
   while(boton)

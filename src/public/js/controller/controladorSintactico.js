@@ -65,7 +65,7 @@ class ControladorSintactico {
         for (let i = 0; i < lexico.length; i++) {
             if (arreglo[i].descripcion == 'Instancia') {
 
-                if (this.arreglo[i][0] == 'const' || 'var') {
+                if (this.arreglo[i][0] == 'const') {
 
                     if (this.arreglo[i][2] == '=') {
 
@@ -75,7 +75,7 @@ class ControladorSintactico {
 
                             for (let l = 0; l < this.Reservadas.length; l++) {
 
-                                for (let k = 0; k <= 1; k++) {
+                                for (let k = 0; k <= 13; k++) {
 
                                     let arregloReser = `${this.Reservadas[l]}(${k})`
 
@@ -92,13 +92,11 @@ class ControladorSintactico {
                                                 elemento.innerHTML = this.ErrorIdNumerico
                                                 j = 11
                                             }
-
                                         }
 
                                     }
                                     else {
                                         elemento.innerHTML = this.ErrorPuerto
-                                        i = lexico.length + 1
                                     }
                                 }
                             }
@@ -115,6 +113,34 @@ class ControladorSintactico {
                 }
             }
         }
+    }
+
+    SintacticoVariables(arreglo, lexico, elemento) {
+        for (let i = 0; i < lexico.length; i++) {
+            if (arreglo[i].descripcion == 'Variable') {
+
+                if (this.arreglo[i][0] == 'var') {
+
+                    if (this.arreglo[i][2] == '=') {
+
+                        for (let j = 0; j < 10; j++) {
+                            if (this.arreglo[i][1].charAt(0) != j) {
+                                elemento.innerHTML = this.NA
+                            }
+                            else {
+                                elemento.innerHTML = this.ErrorIdNumerico
+                                j = 11
+                            }
+                        }
+                    }
+
+                    else {
+                        elemento.innerHTML = this.ErrorIgual
+                    }
+                }
+            }
+        }
+
     }
 
 }
