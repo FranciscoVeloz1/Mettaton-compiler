@@ -27,7 +27,7 @@ task main()
 	}
 
 	EjemploEstructuras() {
-		return `const boton = new Sensor(A5)
+		return `const boton = new Sensor(4)
 const motor1 = new Motor(5)
 
 var velocidad = 127
@@ -74,7 +74,9 @@ task main()
 		return `const motor1 = new Motor(5)
 const motor2 = new Motor(6)
 
-function avanzar(velocidad)
+var tiempo = 2000
+
+function avanzar (velocidad)
 {
   motor1.run(velocidad)
   motor2.run(velocidad)

@@ -15,56 +15,61 @@ class ControladorSintactico {
         this.ErrorParFin = 'Error Sintactico F-004: Faltante ) después de parámetros formales'
     }
 
-    MetodoPrincipal(arreglo) {
-        let res = false
-        for (let i = 0; i < arreglo.length; i++) {
-
-            if (arreglo[i].descripcion == 'Metodo principal') {
-
-                if (arreglo[i + 1].descripcion == 'Llave inicio') {
-
-                    if (arreglo[arreglo.length - 1].descripcion == 'Llave fin') {
-                        res = true
-                    }
-                    else {
-                        res = null
-                    }
-                }
-
-                else {
-                    res = false
-                }
-            }
-        }
-        return res
-    }
-
-    CondicionMetodoPrincipal(arreglo, elemento) {
-        if (this.MetodoPrincipal(arreglo)) {
-            elemento.innerHTML += this.NA
-        }
-
-        else if (this.MetodoPrincipal(arreglo) == false) {
-            elemento.innerHTML = this.ErrorLlaveInicio
-        }
-
-        else {
-            elemento.innerHTML = this.ErrorLlaveFin
-        }
-    }
-
     SepararLinea(arregloLexico) {
         for (let i = 0; i < arregloLexico.length; i++) {
             this.arreglo[i] = arregloLexico[i].split(/[\s]+/);
         }
     }
 
-    /*SintacticoLLaves() {
-        Hacer un contador de llaves de inicio y uno de llaves de fin..
-        Si al final ambos contadores no coinciden, quiere decir que falta una llave
-    }*/
+    EjecutarSintactico(arreglo, lexico, elemento) {
+        elemento.innerHTML = this.NA
 
-    SinstacticoInstancia(arreglo, lexico, elemento) {
+        if (this.SinstacticoInstancia(arreglo, lexico) == "true") {
+            if (this.SintacticoVariables(arreglo, lexico) == "true") {
+                if (this.SintacticoFunciones(arreglo, lexico) == "true") {
+                    if (this.SintacticoLLaves(arreglo, lexico) == "true") {
+                        elemento.innerHTML = this.NA
+                    }
+                    else {
+                        elemento.innerHTML = this.SintacticoLLaves(arreglo, lexico)
+                    }
+                }
+                else {
+                    elemento.innerHTML = this.SintacticoFunciones(arreglo, lexico)
+                }
+            }
+            else {
+                elemento.innerHTML = this.SintacticoVariables(arreglo, lexico)
+            }
+        }
+        else {
+            elemento.innerHTML = this.SinstacticoInstancia(arreglo, lexico)
+        }
+    }
+
+    SintacticoLLaves(arreglo, lexico) {
+        let contadorIn = 0
+        let contadorFin = 0
+        for (let i = 0; i < lexico.length; i++) {
+            if (arreglo[i].descripcion == 'Llave inicio') {
+                contadorIn++
+            }
+
+            else if (arreglo[i].descripcion == 'Llave fin') {
+                contadorFin++
+            }
+        }
+
+        if (contadorFin == contadorIn) {
+            return "true"
+        }
+
+        else {
+            return "Error Sintactico L-001: Falta una llave"
+        }
+    }
+
+    SinstacticoInstancia(arreglo, lexico) {
         for (let i = 0; i < lexico.length; i++) {
             if (arreglo[i].descripcion == 'Instancia') {
                 if (this.arreglo[i][0] == 'const') {
@@ -78,7 +83,7 @@ class ControladorSintactico {
 
                                         k = 14;
                                         l = 5;
-                                        
+
                                         for (let j = 0; j < 10; j++) {
                                             if (this.arreglo[i][1].charAt(0) != j) {
                                                 this.resultado = "true"
@@ -90,23 +95,24 @@ class ControladorSintactico {
                                         }
                                     }
                                     else {
-                                        this.resultado = this.ErrorPuerto
+                                        this.resultado = `Error Sintactico I-004: ${this.ErrorPuerto}`
                                     }
                                 }
                             }
                         }
                         else {
-                            this.resultado = this.ErrorNew
+                            this.resultado = `Error Sintactico I-003: ${this.ErrorNew}`
                         }
                     }
                     else {
-                        this.resultado = this.ErrorIgual
+                        this.resultado = `Error Sintactico I-002: ${this.ErrorIgual}`
                     }
                 }
             }
         }
+        return this.resultado
     }
-    /*
+
     SintacticoVariables(arreglo, lexico, elemento) {
         for (let i = 0; i < lexico.length; i++) {
             if (arreglo[i].descripcion == 'Variable') {
@@ -117,21 +123,23 @@ class ControladorSintactico {
 
                         for (let j = 0; j < 10; j++) {
                             if (this.arreglo[i][1].charAt(0) != j) {
-                                elemento.innerHTML = this.NA
+                                this.resultado = "true"
                             }
                             else {
-                                elemento.innerHTML = this.ErrorIdNumerico
+                                this.resultado = `Error Sintactico V-001: ${this.ErrorIdNumerico}`
                                 j = 11
                             }
                         }
                     }
 
                     else {
-                        elemento.innerHTML = this.ErrorIgual
+                        this.resultado = `Error Sintactico V-002: ${this.ErrorIgual}`
                     }
                 }
             }
         }
+
+        return this.resultado
     }
 
     SintacticoFunciones(arreglo, lexico, elemento) {
@@ -146,26 +154,26 @@ class ControladorSintactico {
 
                             for (let j = 0; j < 10; j++) {
                                 if (this.arreglo[i][1].charAt(0) != j) {
-                                    elemento.innerHTML = this.NA
+                                    this.resultado = "true"
                                 }
                                 else {
-                                    elemento.innerHTML = this.ErrorIdNumerico
+                                    this.resultado = `Error Sintactico F-001: ${this.ErrorIdNumerico}`
                                     j = 11
                                 }
                             }
                         }
                         else {
-                            elemento.innerHTML = this.ErrorParFin
+                            this.resultado = `Error Sintactico F-003: ${this.ErrorParFin}`
                         }
                     }
                     else {
-                        elemento.innerHTML = this.ErrorParInicio
+                        this.resultado = `Error Sintactico F-004: ${this.ErrorParInicio}`
                     }
                 }
             }
         }
+        return this.resultado
     }
-*/
 }
 
 export default ControladorSintactico
