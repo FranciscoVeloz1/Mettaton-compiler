@@ -188,7 +188,6 @@ class ControladorSintactico {
                     let parametros = this.arreglo[i][1]
                     if (parametros.charAt(4) == '(') {
                         if (parametros.charAt(parametros.length - 1) == ')') {
-                            debugger
                             for (let j = 0; j < 10; j++) {
                                 if (parametros.charAt(5) != j) {
                                     this.resultado = "true"   

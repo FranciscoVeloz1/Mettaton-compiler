@@ -14,8 +14,16 @@ class ControladorIndex {
         this.elemento.classList.remove(clase);
     }
 
-    ErrorSintactico() {
-        
+    ErrorSintactico(elemento, btn) {
+        if (elemento.innerText != 'Ningun problema ha sido detectado') {
+            this.QuitarClase(btn, "txtnegro")
+            this.AñadirClase(btn, "txtrojo")
+        }
+
+        else{
+            this.QuitarClase(btn, "txtrojo")
+            this.AñadirClase(btn, "txtnegro")
+        }
     }
 }
 

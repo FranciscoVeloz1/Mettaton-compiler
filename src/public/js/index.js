@@ -49,8 +49,11 @@ btnCompilar.addEventListener('click', () => {
     lexico.AnalizadorLexico(coleccion, "resultado")
 
     //Analisis sintactico
+    
+    
     sintactico.SepararLinea(lexico.arreglo)
     sintactico.EjecutarSintactico(coleccion, lexico.arreglo, lblproblemas)
+    conIndex.ErrorSintactico(lblproblemas, 'btnSintactico')
 })
 
 btnCondicional.addEventListener('click', () => {

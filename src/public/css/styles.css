@@ -132,6 +132,14 @@ body {
 .sintactico_show {
     transform: translateX(0);
 }
+
+.txtrojo {
+    color: red;
+}
+
+.txtnegro {
+    color: #1a1a1a;
+}
 /* Problemas del analisis sintactico */
 
 /* ---------------------scrollbar---------------------*/
