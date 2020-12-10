@@ -14,6 +14,7 @@ class ControladorSintactico {
         this.ErrorParInicio = 'Faltante ( antes de los parámetros formales'
         this.ErrorParFin = 'Faltante ) después de parámetros formales'
         this.Errorpara = 'Falta parámetro formal'
+        this.ErrorMetodo = 'Falta el nombre después . operador'
     }
 
     SepararLinea(arregloLexico) {
@@ -30,7 +31,17 @@ class ControladorSintactico {
                 if (this.SintacticoFunciones(arreglo, lexico) == "true") {
                     if (this.SintacticoLLaves(arreglo, lexico) == "true") {
                         if (this.SintacticoPrincipal(arreglo, lexico) == "true") {
-                            elemento.innerHTML = this.NA
+                            if (this.SintacticoTiempo(arreglo, lexico) == "true") {
+                                if (this.SintacticoMetodo(arreglo, lexico) == "true") {
+                                    elemento.innerHTML = this.NA
+                                }
+                                else {
+                                    elemento.innerHTML = this.SintacticoMetodo(arreglo, lexico)
+                                }
+                            }
+                            else {
+                                elemento.innerHTML = this.SintacticoTiempo(arreglo, lexico)
+                            }
                         }
                         else {
                             elemento.innerHTML = this.SintacticoPrincipal(arreglo, lexico)
@@ -190,7 +201,7 @@ class ControladorSintactico {
                         if (parametros.charAt(parametros.length - 1) == ')') {
                             for (let j = 0; j < 10; j++) {
                                 if (parametros.charAt(5) != j) {
-                                    this.resultado = "true"   
+                                    this.resultado = "true"
                                 }
                                 else {
                                     this.resultado = `Error Sintactico T-002: ${this.Errorpara}`
@@ -205,6 +216,74 @@ class ControladorSintactico {
                     else {
                         this.resultado = `Error Sintactico T-003: ${this.ErrorParInicio}`
                     }
+                }
+            }
+        }
+        return this.resultado
+    }
+
+    SintacticoTiempo(arreglo, lexico) {
+        for (let i = 0; i < lexico.length; i++) {
+            if (arreglo[i].descripcion == 'Metodo tiempo') {
+                let parametros = this.arreglo[i][1]
+                if (parametros.charAt(9) == '(') {
+                    if (parametros.charAt(parametros.length - 1) == ')') {
+                        for (let j = 0; j < 10; j++) {
+                            if (parametros.charAt(10) == j) {
+                                this.resultado = "true"
+                                j = 10
+                            }
+                            else {
+                                this.resultado = `Error Sintactico W-001: ${this.Errorpara}`
+                            }
+                        }
+                    }
+                    else {
+                        this.resultado = `Error Sintactico W-003: ${this.ErrorParFin}`
+                    }
+                }
+
+                else {
+                    this.resultado = `Error Sintactico W-002: ${this.ErrorParInicio}`
+                }
+            }
+        }
+        return this.resultado
+    }
+
+    SintacticoMetodo(arreglo, lexico) {
+        for (let i = 0; i < lexico.length; i++) {
+            if (arreglo[i].descripcion == 'Metodo') {
+                let newArreglo = this.arreglo[i][1].split(".")
+
+                if (newArreglo[1] == "on" || newArreglo[1] == "off") {
+                    console.log(newArreglo[0])
+                    for (let j = 0; j < 10; j++) {
+
+                        if (newArreglo[0].charAt(0) != j) {
+                            this.resultado = "true"
+                        }
+                        else {
+                            debugger
+                            this.resultado = `Error Sintactico M-002: ${this.ErrorIdNumerico}`
+                            j = 11
+                            i = lexico.length + 1
+                        }
+                    }
+                }
+
+                else if (newArreglo[1].charAt(0) == 'r') {
+                    console.log(newArreglo[0])
+                    this.resultado = "true"
+                }
+
+                else if (newArreglo[1].charAt(0) == 'p') {
+                    console.log(newArreglo[0])
+                    this.resultado = "true"
+                }
+
+                else {
+                    this.resultado = `Error Sintactico M-001: ${this.ErrorMetodo}`
                 }
             }
         }
