@@ -8,11 +8,12 @@ class ControladorSintactico {
         this.ErrorLlaveInicio = 'Error Sintactico: Faltante { antes del cuerpo\n'
         this.ErrorLlaveFin = 'Error Sintactico: Faltante } después del cuerpo\n'
         this.ErrorIdNumerico = 'El identificador comienza inmediatamente después del literal numérico\n'
-        this.ErrorIgual = 'Error Sintactico I-002: Faltante = en declaración de variable\n'
-        this.ErrorNew = 'Error Sintactico I-003: Los constructores de clase deben ser invocados con new\n'
-        this.ErrorPuerto = 'Error Sintactico I-004: Redeclaración de constante\n'
-        this.ErrorParInicio = 'Error Sintactico F-004: Faltante ( antes de los parámetros formales'
-        this.ErrorParFin = 'Error Sintactico F-004: Faltante ) después de parámetros formales'
+        this.ErrorIgual = 'Faltante = en declaración de variable\n'
+        this.ErrorNew = 'Los constructores de clase deben ser invocados con new\n'
+        this.ErrorPuerto = 'Redeclaración de constante\n'
+        this.ErrorParInicio = 'Faltante ( antes de los parámetros formales'
+        this.ErrorParFin = 'Faltante ) después de parámetros formales'
+        this.Errorpara = 'Falta parámetro formal'
     }
 
     SepararLinea(arregloLexico) {
@@ -28,7 +29,12 @@ class ControladorSintactico {
             if (this.SintacticoVariables(arreglo, lexico) == "true") {
                 if (this.SintacticoFunciones(arreglo, lexico) == "true") {
                     if (this.SintacticoLLaves(arreglo, lexico) == "true") {
-                        elemento.innerHTML = this.NA
+                        if (this.SintacticoPrincipal(arreglo, lexico) == "true") {
+                            elemento.innerHTML = this.NA
+                        }
+                        else {
+                            elemento.innerHTML = this.SintacticoPrincipal(arreglo, lexico)
+                        }
                     }
                     else {
                         elemento.innerHTML = this.SintacticoLLaves(arreglo, lexico)
@@ -113,7 +119,7 @@ class ControladorSintactico {
         return this.resultado
     }
 
-    SintacticoVariables(arreglo, lexico, elemento) {
+    SintacticoVariables(arreglo, lexico) {
         for (let i = 0; i < lexico.length; i++) {
             if (arreglo[i].descripcion == 'Variable') {
 
@@ -142,7 +148,7 @@ class ControladorSintactico {
         return this.resultado
     }
 
-    SintacticoFunciones(arreglo, lexico, elemento) {
+    SintacticoFunciones(arreglo, lexico) {
         for (let i = 0; i < lexico.length; i++) {
             if (arreglo[i].descripcion == 'Función') {
 
@@ -168,6 +174,37 @@ class ControladorSintactico {
                     }
                     else {
                         this.resultado = `Error Sintactico F-004: ${this.ErrorParInicio}`
+                    }
+                }
+            }
+        }
+        return this.resultado
+    }
+
+    SintacticoPrincipal(arreglo, lexico) {
+        for (let i = 0; i < lexico.length; i++) {
+            if (arreglo[i].descripcion == 'Metodo principal') {
+                if (this.arreglo[i][0] == 'task') {
+                    let parametros = this.arreglo[i][1]
+                    if (parametros.charAt(4) == '(') {
+                        if (parametros.charAt(parametros.length - 1) == ')') {
+                            debugger
+                            for (let j = 0; j < 10; j++) {
+                                if (parametros.charAt(5) != j) {
+                                    this.resultado = "true"   
+                                }
+                                else {
+                                    this.resultado = `Error Sintactico T-002: ${this.Errorpara}`
+                                    j = 10
+                                }
+                            }
+                        }
+                        else {
+                            this.resultado = `Error Sintactico T-004: ${this.ErrorParFin}`
+                        }
+                    }
+                    else {
+                        this.resultado = `Error Sintactico T-003: ${this.ErrorParInicio}`
                     }
                 }
             }

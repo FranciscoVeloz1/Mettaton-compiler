@@ -7,7 +7,7 @@ class ControladorLexico {
     this.linea = lin
     this.arreglo = []
     this.patronComparacion = /^[(]\w*\s*c|<|>|==|!=|<=\s*\w*[)]+$/i
-    this.patronMain = /^task main+[()]+$/i
+    this.patronMain = /^task main+[(\w*\s*)]+$/i
     this.patronLlaveInicio = /^\s*{+$/i
     this.patronLlaveFin = /^\s*}+$/i
     this.patronComentario = /^\s*[//]\w*/i

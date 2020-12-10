@@ -13,6 +13,10 @@ class ControladorIndex {
         this.elemento = document.getElementById(id)
         this.elemento.classList.remove(clase);
     }
+
+    ErrorSintactico() {
+        
+    }
 }
 
 export default ControladorIndex
