@@ -20,7 +20,7 @@ class ControladorIndex {
             this.AñadirClase(btn, "txtrojo")
         }
 
-        else{
+        else {
             this.QuitarClase(btn, "txtrojo")
             this.AñadirClase(btn, "txtnegro")
         }

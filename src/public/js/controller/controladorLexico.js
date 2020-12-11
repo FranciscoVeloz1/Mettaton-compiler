@@ -19,7 +19,10 @@ class ControladorLexico {
     this.patronFunction = /^\s*function \w*\s*[(\w*)]+$/
     this.patronTiempo = /^\s*wait1msec[(\w*)]+$/
     this.patronReservada = /^\s*new|Servo|Relay|Sensor|Motor|return|PI/
-    this.patronMetodo = /^click|run|off|position|on+$/i
+    this.patronMetodoRun = /^\s*\w*[.]run[(\d*\w*)]+$/i
+    this.patronMetodoOff = /^click|off+$/i
+    this.patronMetodoPos = /^\s*\w*[.]position[(\d*\w*)]+$/i
+    this.patronMetodoOn = /^click|on+$/i
     this.anyFunction = /^\s*\w*[(]\w\w*[)]+$/i
   }
 
@@ -109,8 +112,20 @@ class ControladorLexico {
         arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Instancia", 1))
       }
 
-      else if (this.Comprobar(this.arreglo[i], this.patronMetodo) == true) {
-        arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Metodo", 1))
+      else if (this.Comprobar(this.arreglo[i], this.patronMetodoRun) == true) {
+        arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Metodo run", 1))
+      }
+
+      else if (this.Comprobar(this.arreglo[i], this.patronMetodoOff) == true) {
+        arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Metodo relay", 1))
+      }
+
+      else if (this.Comprobar(this.arreglo[i], this.patronMetodoPos) == true) {
+        arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Metodo posicion", 1))
+      }
+
+      else if (this.Comprobar(this.arreglo[i], this.patronMetodoOn) == true) {
+        arreglo.push(new ControladorLexico(i + 1, this.arreglo[i], "Metodo relay", 1))
       }
 
       else if (this.Comprobar(this.arreglo[i], this.patronReservada) == true) {

@@ -32,11 +32,21 @@ class ControladorSintactico {
                     if (this.SintacticoLLaves(arreglo, lexico) == "true") {
                         if (this.SintacticoPrincipal(arreglo, lexico) == "true") {
                             if (this.SintacticoTiempo(arreglo, lexico) == "true") {
-                                if (this.SintacticoMetodo(arreglo, lexico) == "true") {
-                                    elemento.innerHTML = this.NA
+                                if (this.SintacticoRelay(arreglo, lexico) == "true") {
+                                    if (this.SintacticoMotor(arreglo, lexico) == "true") {
+                                        if (this.SintacticoServo(arreglo, lexico) == "true") {
+                                            elemento.innerHTML = this.NA
+                                        }
+                                        else {
+                                            elemento.innerHTML = this.SintacticoServo(arreglo, lexico)
+                                        }
+                                    }
+                                    else {
+                                        elemento.innerHTML = this.SintacticoMotor(arreglo, lexico)
+                                    }
                                 }
                                 else {
-                                    elemento.innerHTML = this.SintacticoMetodo(arreglo, lexico)
+                                    elemento.innerHTML = this.SintacticoRelay(arreglo, lexico)
                                 }
                             }
                             else {
@@ -251,35 +261,87 @@ class ControladorSintactico {
         return this.resultado
     }
 
-    SintacticoMetodo(arreglo, lexico) {
+    SintacticoRelay(arreglo, lexico) {
         for (let i = 0; i < lexico.length; i++) {
-            if (arreglo[i].descripcion == 'Metodo') {
+            if (arreglo[i].descripcion == 'Metodo relay') {
+
+                let newArreglo = this.arreglo[i][1].split(".")
+                if (newArreglo[1] == "on" || newArreglo[1] == "off") {
+                    this.resultado = "true"
+                }
+            }
+        }
+        return this.resultado
+    }
+
+    SintacticoMotor(arreglo, lexico) {
+        for (let i = 0; i < lexico.length; i++) {
+            if (arreglo[i].descripcion == 'Metodo run') {
                 let newArreglo = this.arreglo[i][1].split(".")
 
-                if (newArreglo[1] == "on" || newArreglo[1] == "off") {
-                    console.log(newArreglo[0])
-                    for (let j = 0; j < 10; j++) {
+                if (newArreglo[1].charAt(0) == 'r') {
+                    if (newArreglo[1].charAt(3) == '(') {
 
-                        if (newArreglo[0].charAt(0) != j) {
-                            this.resultado = "true"
+                        if (newArreglo[1].charAt(newArreglo[1].length - 1) == ')') {
+
+                            for (let j = 0; j < 10; j++) {
+
+                                if (newArreglo[1].charAt(4) == j) {
+                                    this.resultado = "true"
+                                    j = 10
+                                }
+
+                                else {
+                                    this.resultado = `Error Sintactico M-001: ${this.Errorpara}`
+                                }
+                            }
+
                         }
                         else {
-                            debugger
-                            this.resultado = `Error Sintactico M-002: ${this.ErrorIdNumerico}`
-                            j = 11
-                            i = lexico.length + 1
+                            this.resultado = `Error Sintactico M-003: ${this.ErrorParFin}`
                         }
                     }
-                }
 
-                else if (newArreglo[1].charAt(0) == 'r') {
-                    console.log(newArreglo[0])
-                    this.resultado = "true"
+                    else {
+                        this.resultado = `Error Sintactico M-002: ${this.ErrorParInicio}`
+                    }
                 }
+            }
+        }
+        return this.resultado
+    }
 
-                else if (newArreglo[1].charAt(0) == 'p') {
-                    console.log(newArreglo[0])
-                    this.resultado = "true"
+    SintacticoServo(arreglo, lexico) {
+        for (let i = 0; i < lexico.length; i++) {
+            if (arreglo[i].descripcion == 'Metodo posicion') {
+                let newArreglo = this.arreglo[i][1].split(".")
+
+                if (newArreglo[1].charAt(0) == 'p') {
+
+                    if (newArreglo[1].charAt(8) == '(') {
+                        
+                        if (newArreglo[1].charAt(newArreglo[1].length - 1) == ')') {
+
+                            for (let j = 0; j < 10; j++) {
+
+                                if (newArreglo[1].charAt(9) == j) {
+                                    this.resultado = "true"
+                                    j = 10
+                                }
+                                else {
+                                    this.resultado = `Error Sintactico P-001: ${this.Errorpara}`
+                                }
+                            }
+                        }
+
+                        else {
+                            this.resultado = `Error Sintactico P-003: ${this.ErrorParFin}`
+                        }
+                    }
+
+                    else {
+                        this.resultado = `Error Sintactico P-002: ${this.ErrorParInicio}`
+                    }
                 }
 
                 else {
