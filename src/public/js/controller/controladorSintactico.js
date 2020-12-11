@@ -35,7 +35,12 @@ class ControladorSintactico {
                                 if (this.SintacticoRelay(arreglo, lexico) == "true") {
                                     if (this.SintacticoMotor(arreglo, lexico) == "true") {
                                         if (this.SintacticoServo(arreglo, lexico) == "true") {
-                                            elemento.innerHTML = this.NA
+                                            if (this.SintacticoNoIdentificado(arreglo, lexico) == "true") {
+                                                elemento.innerHTML = 'Error Sintactico: Token no identificado'
+                                            }
+                                            else {
+                                                elemento.innerHTML = this.NA
+                                            }
                                         }
                                         else {
                                             elemento.innerHTML = this.SintacticoServo(arreglo, lexico)
@@ -94,6 +99,21 @@ class ControladorSintactico {
         else {
             return "Error Sintactico L-001: Falta una llave"
         }
+    }
+
+
+    SintacticoNoIdentificado(arreglo, lexico) {
+        for (let i = 0; i < lexico.length; i++) {
+            if (arreglo[i].descripcion == 'No identificado') {
+                this.resultado = "true"
+                i = lexico.length + 1
+            }
+
+            else {
+                this.resultado = "false"
+            }
+        }
+        return this.resultado
     }
 
     SinstacticoInstancia(arreglo, lexico) {
@@ -319,7 +339,7 @@ class ControladorSintactico {
                 if (newArreglo[1].charAt(0) == 'p') {
 
                     if (newArreglo[1].charAt(8) == '(') {
-                        
+
                         if (newArreglo[1].charAt(newArreglo[1].length - 1) == ')') {
 
                             for (let j = 0; j < 10; j++) {
