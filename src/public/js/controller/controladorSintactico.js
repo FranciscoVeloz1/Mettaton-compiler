@@ -373,4 +373,4 @@ class ControladorSintactico {
     }
 }
 
-export default ControladorSintactico
+// export default ControladorSintactico

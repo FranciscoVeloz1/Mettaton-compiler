@@ -1,7 +1,8 @@
 import ControladorIndex from './controller/controladorIndex.js'
 import ControladorLexico from './controller/controladorLexico.js'
-import ControladorSintactico from './controller/controladorSintactico.js'
+import ControladorSintactico from './sintactico/sintactico.controlador.js'
 import ControladorEjemplos from './controller/controladorEjemplos.js'
+import ControladorSemantico from './controller/controladorSemantico.js'
 
 //Elementos del compilador
 const txtArea = document.getElementById("txtArea")
@@ -21,6 +22,7 @@ const btnTiempo = document.getElementById("Tiempo")
 const conIndex = new ControladorIndex()
 const lexico = new ControladorLexico()
 const sintactico = new ControladorSintactico()
+const semantico = new ControladorSemantico()
 const ejemplos = new ControladorEjemplos()
 
 let coleccion = []
@@ -49,9 +51,11 @@ btnCompilar.addEventListener('click', () => {
     lexico.AnalizadorLexico(coleccion, "resultado")
 
     //Analisis sintactico
-    sintactico.SepararLinea(lexico.arreglo)
-    sintactico.EjecutarSintactico(coleccion, lexico.arreglo, lblproblemas)
+    lblproblemas.innerHTML = sintactico.EjecutarSintactico(coleccion)
     conIndex.ErrorSintactico(lblproblemas, 'btnSintactico')
+
+    //Analisis semantico
+    // alert(semantico.Semantico(lexico.arreglo))
 })
 
 btnCondicional.addEventListener('click', () => {

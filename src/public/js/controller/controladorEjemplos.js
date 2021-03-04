@@ -1,14 +1,14 @@
 class ControladorEjemplos {
 
 	EjemploCondicionales() {
-		return `//Instancia de un objeto tipo Sensor
-const sensorLuz = new Sensor(A5)
-
-//Instancia de un relevador
-const relay = new Relay(2)
-
-task main()
+		return `task main()
 {
+  //Instancia de un objeto tipo Sensor
+  const sensorLuz = new Sensor(A5)
+
+  //Instancia de un relevador
+  const relay = new Relay(2)
+
   while(true)
   {
     //Si el sensor detecta luz
@@ -27,14 +27,14 @@ task main()
 	}
 
 	EjemploEstructuras() {
-		return `const boton = new Sensor(4)
-const motor1 = new Motor(5)
-
-var velocidad = 127
-var mensaje = 'Mensaje'
-
-task main()
+		return `task main()
 {
+  const boton = new Sensor(4)
+  const motor1 = new Motor(5)
+
+  var velocidad = 127
+  var mensaje = 'Mensaje'
+  
   while(boton)
   {
     motor.run(255)
@@ -44,14 +44,14 @@ task main()
 	}
 
 	EjemploMetodos() {
-		return `//Instancias de un sensor, motor, relevador y servo
-const boton = new Sensor(A5)
-const motor1 = new Motor(5)
-const relay1 = new Relay(6)
-const servo1 = new Servo(7)
-
-task main()
+		return `task main()
 {
+  //Instancias de un sensor, motor, relevador y servo
+  const boton = new Sensor(A5)
+  const motor1 = new Motor(5)
+  const relay1 = new Relay(6)
+  const servo1 = new Servo(7)
+
   while(true)
   {
     if(boton)
@@ -71,19 +71,20 @@ task main()
 	}
 
 	EjemploFunciones() {
-		return `const motor1 = new Motor(5)
-const motor2 = new Motor(6)
-
-var tiempo = 2000
-
-function avanzar (velocidad)
+		return `task main()
 {
-  motor1.run(velocidad)
-  motor2.run(velocidad)
-}
+  const motor1 = new Motor(5)
+  const motor2 = new Motor(6)
 
-task main()
-{
+  var tiempo = 2000
+
+  function avanzar (velocidad)
+  {
+    motor1.run(velocidad)
+    motor2.run(velocidad)
+  }
+
+
   while(true)
   {
     avanzar(100)
@@ -92,10 +93,10 @@ task main()
 	}
 
 	EjemploTiempo() {
-		return `const motor1 = new Motor(5)
-
-task main()
+		return `task main()
 {
+  const motor1 = new Motor(5)
+
   while(true)
   {
     motor.run(255)
