@@ -34,7 +34,7 @@ class ControladorEjemplos {
 
   var velocidad = 127
   var mensaje = 'Mensaje'
-  
+
   while(boton)
   {
     motor.run(255)

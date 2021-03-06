@@ -1,5 +1,44 @@
 class Instancia {
 
+    ReglaConst(coleccion) {
+        let instruction = coleccion.filter(inst => inst.descripcion == 'Instancia')
+        let result;
+
+        for (let i = 0; i < instruction.length; i++) {
+            let token = instruction[i].token.trim().split(' ');
+
+            if (token[0] == 'const') {
+                result = ''
+            } else {
+                result = 'Error Sintactico I-001: Las instancias deben de iniciar con const\n'
+                i = instruction.length + 1
+            }
+        }
+
+        return result
+    }
+
+    ReglaIdentificador(coleccion) {
+        let instruction = coleccion.filter(inst => inst.descripcion == 'Instancia')
+        let result;
+
+        for (let i = 0; i < instruction.length; i++) {
+            let token = instruction[i].token.trim().split(' ');
+
+            for (let j = 0; j <= 9; j++) {
+                if (token[1].charAt(0) != j) {
+                    result = ''
+                } else {
+                    result = 'Error Sintactico I-002: Los identificadores no deben iniciar con un caracter numerico\n'
+                    j = 10
+                    i = instruction.length + 1
+                }
+            }
+        }
+
+        return result
+    }
+
     ReglaIgual(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Instancia')
         let result;
@@ -38,18 +77,18 @@ class Instancia {
 
     ReglaReservadas(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Instancia')
+        const error = 'Error Sintactico I-005: Faltante ) después de parámetros formales'
         let result
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
             let res = token[4].split('(')
 
-            debugger
             if (res[0] == 'Servo') {
                 if (res[1].charAt(res[1].length - 1) == ')') {
                     result = ''
                 } else {
-                    result = 'Error Sintactico I-005: Falta parentesis cierra'
+                    result = error
                     i = instruction.length + 1
 
                 }
@@ -57,21 +96,21 @@ class Instancia {
                 if (res[1].charAt(res[1].length - 1) == ')') {
                     result = ''
                 } else {
-                    result = 'Error Sintactico I-005: Falta parentesis cierra'
+                    result = error
                     i = instruction.length + 1
                 }
             } else if (res[0] == 'Sensor') {
                 if (res[1].charAt(res[1].length - 1) == ')') {
                     result = ''
                 } else {
-                    result = 'Error Sintactico I-005: Falta parentesis cierra'
+                    result = error
                     i = instruction.length + 1
                 }
             } else if (res[0] == 'Relay') {
                 if (res[1].charAt(res[1].length - 1) == ')') {
                     result = ''
                 } else {
-                    result = 'Error Sintactico I-005: Falta parentesis cierra'
+                    result = error
                     i = instruction.length + 1
                 }
             } else {
@@ -88,8 +127,11 @@ class Instancia {
         let result = ''
 
         if (coleccion.length > 1) {
-
-            result = this.ReglaIgual(coleccion)
+            result = this.ReglaConst(coleccion)
+            if (result.length == 0)
+                result = this.ReglaIdentificador(coleccion)
+            if (result.length == 0)
+                result = this.ReglaIgual(coleccion)
             if (result.length == 0)
                 result = this.ReglaNew(coleccion)
             if (result.length == 0)

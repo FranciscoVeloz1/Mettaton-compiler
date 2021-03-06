@@ -1,6 +1,7 @@
 import llaves from './llaves.js'
 import sinIdentificar from './sinIdentificar.js'
 import instancia from './instancia.js'
+import variable from './variable.js'
 
 class ControladorSintactico {
     constructor() {
@@ -19,6 +20,8 @@ class ControladorSintactico {
                 result = sinIdentificar(coleccion)
             if (result.length == 0)
                 result = instancia.EjecutarInstancia(coleccion)
+            if (result.length == 0)
+                result = variable.EjecutarVariable(coleccion)
             if (result.length == 0)
                 result = 'Ningun problema ha sido detectado'
 
