@@ -3,6 +3,7 @@ import sinIdentificar from './sinIdentificar.js'
 import instancia from './instancia.js'
 import variable from './variable.js'
 import funcion from './funciones.js'
+import principal from './principal.js'
 
 class ControladorSintactico {
     constructor() {
@@ -26,12 +27,13 @@ class ControladorSintactico {
             if (result.length == 0)
                 result = funcion.EjecutarFuncion(coleccion)
             if (result.length == 0)
+                result = principal.EjecutarPrincipal(coleccion)
+            if (result.length == 0)
                 result = 'Ningun problema ha sido detectado'
 
             return result
         }
     }
-
 }
 
 export default ControladorSintactico
