@@ -2,7 +2,7 @@ class Principal {
 
     ReglaTask(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Metodo principal')
-        let result;
+        let result = '';
         
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
@@ -20,7 +20,7 @@ class Principal {
 
     ReglaMain(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Metodo principal')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');

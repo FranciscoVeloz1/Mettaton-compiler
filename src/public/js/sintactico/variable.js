@@ -2,8 +2,8 @@ class Variable {
 
     ReglaVar(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Variable')
-        let result;
-
+        let result = '';
+        
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
 
@@ -20,7 +20,7 @@ class Variable {
 
     ReglaIdentificador(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Variable')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
@@ -41,7 +41,7 @@ class Variable {
 
     ReglaIgual(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Variable')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');

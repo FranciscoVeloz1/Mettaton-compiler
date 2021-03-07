@@ -6,10 +6,6 @@ import funcion from './funciones.js'
 import principal from './principal.js'
 
 class ControladorSintactico {
-    constructor() {
-        this.arreglo = []
-        this.Reservadas = ['Sensor', 'Motor', 'Servo', 'Relay']
-    }
 
     //EJECUTAR SINTACTICO
     EjecutarSintactico(coleccion) {

@@ -2,7 +2,7 @@ class Instancia {
 
     ReglaConst(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Instancia')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
@@ -20,7 +20,7 @@ class Instancia {
 
     ReglaIdentificador(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Instancia')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
@@ -41,7 +41,7 @@ class Instancia {
 
     ReglaIgual(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Instancia')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
@@ -59,7 +59,7 @@ class Instancia {
 
     ReglaNew(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Instancia')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
@@ -78,7 +78,7 @@ class Instancia {
     ReglaReservadas(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Instancia')
         const error = 'Error Sintactico I-005: Faltante ) después de parámetros formales'
-        let result
+        let result = ''
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');

@@ -2,7 +2,7 @@ class Funciones {
 
     ReglaFuncion(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Función')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
@@ -20,7 +20,7 @@ class Funciones {
 
     ReglaIdentificador(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Función')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
@@ -41,7 +41,7 @@ class Funciones {
 
     ReglaParentesisInicio(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Función')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
@@ -59,7 +59,7 @@ class Funciones {
 
     ReglaParentesisCierre(coleccion) {
         let instruction = coleccion.filter(inst => inst.descripcion == 'Función')
-        let result;
+        let result = '';
 
         for (let i = 0; i < instruction.length; i++) {
             let token = instruction[i].token.trim().split(' ');
