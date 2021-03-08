@@ -5,6 +5,7 @@ import variable from './variable.js'
 import funcion from './funciones.js'
 import principal from './principal.js'
 import tiempo from './tiempo.js'
+import servo from './servo.js'
 
 class ControladorSintactico {
 
@@ -13,6 +14,8 @@ class ControladorSintactico {
         let result = ''
 
         if (coleccion.length > 1) {
+
+            console.log(servo.EjecutarServo(coleccion))
 
             result = llaves(coleccion)
             if (result.length == 0)
@@ -27,6 +30,8 @@ class ControladorSintactico {
                 result = principal.EjecutarPrincipal(coleccion)
             if (result.length == 0)
                 result = tiempo.EjecutarTiempo(coleccion)
+            if (result.length == 0)
+                result = servo.EjecutarServo(coleccion)
             if (result.length == 0)
                 result = 'Ningun problema ha sido detectado'
 

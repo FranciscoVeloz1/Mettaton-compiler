@@ -66,7 +66,7 @@ class Tiempo {
             if (result.length == 0)
                 result = this.ReglaDeclarada(coleccion)
             if (result.length == 0)
-                result = 'Ningun problema ha sido detectado'
+                result = ''
 
             return result
         }
