@@ -6,6 +6,9 @@ import funcion from './funciones.js'
 import principal from './principal.js'
 import tiempo from './tiempo.js'
 import servo from './servo.js'
+import motor from './motor.js'
+import condicional from './condicional.js'
+import estructura from './estructura.js'
 
 class ControladorSintactico {
 
@@ -32,6 +35,12 @@ class ControladorSintactico {
                 result = tiempo.EjecutarTiempo(coleccion)
             if (result.length == 0)
                 result = servo.EjecutarServo(coleccion)
+            if (result.length == 0)
+                result = motor.EjecutarMotor(coleccion)
+            if (result.length == 0)
+                result = condicional.EjecutarCondicional(coleccion)
+            if (result.length == 0)
+                result = estructura.EjecutarEstructura(coleccion)
             if (result.length == 0)
                 result = 'Ningun problema ha sido detectado'
 
