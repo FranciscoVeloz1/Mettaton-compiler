@@ -4,6 +4,7 @@ import instancia from './instancia.js'
 import variable from './variable.js'
 import funcion from './funciones.js'
 import principal from './principal.js'
+import tiempo from './tiempo.js'
 
 class ControladorSintactico {
 
@@ -24,6 +25,8 @@ class ControladorSintactico {
                 result = funcion.EjecutarFuncion(coleccion)
             if (result.length == 0)
                 result = principal.EjecutarPrincipal(coleccion)
+            if (result.length == 0)
+                result = tiempo.EjecutarTiempo(coleccion)
             if (result.length == 0)
                 result = 'Ningun problema ha sido detectado'
 

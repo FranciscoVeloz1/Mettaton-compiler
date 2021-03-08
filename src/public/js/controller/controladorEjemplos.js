@@ -9,10 +9,10 @@ class ControladorEjemplos {
   //Instancia de un relevador
   const relay = new Relay(2)
 
-  while(true)
+  while (true)
   {
     //Si el sensor detecta luz
-    if(sensorLuz)
+    if (sensorLuz)
     {
       rele1.off
     }
@@ -35,11 +35,11 @@ class ControladorEjemplos {
   var velocidad = 127
   var mensaje = 'Mensaje'
 
-  while(boton)
+  while (boton)
   {
-    motor.run(255)
+    motor.run (255)
   }
-  motor.run(0)
+  motor.run (0)
 }`
 	}
 
@@ -52,19 +52,19 @@ class ControladorEjemplos {
   const relay1 = new Relay(6)
   const servo1 = new Servo(7)
 
-  while(true)
+  while (true)
   {
-    if(boton)
+    if (boton)
     {
       relay1.on
-      servo1.position(180)
-      motor.run(255)
+      servo1.position (180)
+      motor.run (255)
     }
     else
     {
       relay1.off
-      servo1.position(0)
-      motor.run(0)
+      servo1.position (0)
+      motor.run (0)
     }
   }
 }`
@@ -80,14 +80,14 @@ class ControladorEjemplos {
 
   function avanzar (velocidad)
   {
-    motor1.run(velocidad)
-    motor2.run(velocidad)
+    motor1.run (velocidad)
+    motor2.run (velocidad)
   }
 
 
   while(true)
   {
-    avanzar(100)
+    avanzar (100)
   }
 }`
 	}
@@ -97,16 +97,16 @@ class ControladorEjemplos {
 {
   const motor1 = new Motor(5)
 
-  while(true)
+  while (true)
   {
-    motor.run(255)
-    wait1msec(1000)
+    motor.run (255)
+    wait1msec (1000)
 
-    motor.run(-255)
-    wait1msec(1000)
+    motor.run (255)
+    wait1msec (1000)
 
-    motor.run(0)
-    wait1msec(1000)
+    motor.run (0)
+    wait1msec (1000)
   }
 }`
 	}

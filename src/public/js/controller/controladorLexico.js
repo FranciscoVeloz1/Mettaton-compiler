@@ -48,17 +48,17 @@ class ControladorLexico {
     const patronComentario = /^\s*[//]\w*/i
     const patronCadena = /^\s*var|const \w* = '\w*'+$/i
     const patronInstancia = /\s* a|var|const \w* \s*|= new \w*[(\w*|\d*)]+$/i
-    const patronIf = /^\s*if[(\w*)]+$/
+    const patronIf = /^\s*if\s[(\w*)]+$/
     const patronElse = /^\s*else+$/
-    const patronWhile = /^\s*while[(\w*)]+$/
+    const patronWhile = /^\s*while\s[(\w*)]+$/
     const patronFunction = /^\s*function \w*\s*[(\w*)]+$/
-    const patronTiempo = /^\s*wait1msec[(\w*)]+$/
+    const patronTiempo = /^\s*wait1msec\s[(\w*)]+$/
     const patronReservada = /^\s*new|Servo|Relay|Sensor|Motor|return|PI/
-    const patronMetodoRun = /^\s*\w*[.]run[(\d*\w*)]+$/i
+    const patronMetodoRun = /^\s*\w*[.]run\s[(\d*\w*)]+$/i
     const patronMetodoOff = /^click|off+$/i
-    const patronMetodoPos = /^\s*\w*[.]position[(\d*\w*)]+$/i
+    const patronMetodoPos = /^\s*\w*[.]position\s[(\d*\w*)]+$/i
     const patronMetodoOn = /^click|on+$/i
-    const anyFunction = /^\s*\w*[(]\w\w*[)]+$/i
+    const anyFunction = /^\s*\w*\s[(]\w\w*[)]+$/i
 
     for (let i = 0; i < this.arreglo.length; i++) {
 
