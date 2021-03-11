@@ -52,10 +52,13 @@ btnCompilar.addEventListener('click', () => {
 
     //Analisis sintactico
     lblproblemas.innerHTML = sintactico.EjecutarSintactico(coleccion)
-    conIndex.ErrorSintactico(lblproblemas, 'btnSintactico')
+    conIndex.Errores(lblproblemas, 'btnSintactico')
 
     //Analisis semantico
-    // alert(semantico.Semantico(lexico.arreglo))
+    if (sintactico.EjecutarSintactico(coleccion) == 'Ningun problema ha sido detectado') {
+        lblproblemas.innerHTML = semantico.Semantico(lexico.arreglo, coleccion)
+        conIndex.Errores(lblproblemas, 'btnSintactico')
+    }
 })
 
 btnCondicional.addEventListener('click', () => {

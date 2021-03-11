@@ -14,7 +14,7 @@ class ControladorIndex {
         this.elemento.classList.remove(clase);
     }
 
-    ErrorSintactico(elemento, btn) {
+    Errores(elemento, btn) {
         if (elemento.innerText != 'Ningun problema ha sido detectado') {
             this.QuitarClase(btn, "txtnegro")
             this.AñadirClase(btn, "txtrojo")

@@ -18,8 +18,6 @@ class ControladorSintactico {
 
         if (coleccion.length > 1) {
 
-            console.log(servo.EjecutarServo(coleccion))
-
             result = llaves(coleccion)
             if (result.length == 0)
                 result = sinIdentificar(coleccion)
