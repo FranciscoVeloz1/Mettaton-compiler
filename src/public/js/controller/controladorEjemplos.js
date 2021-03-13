@@ -85,7 +85,7 @@ class ControladorEjemplos {
   }
 
 
-  while(true)
+  while (true)
   {
     avanzar (100)
   }

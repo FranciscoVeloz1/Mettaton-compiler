@@ -2,7 +2,7 @@ import ControladorIndex from './controller/controladorIndex.js'
 import ControladorLexico from './controller/controladorLexico.js'
 import ControladorSintactico from './sintactico/sintactico.controlador.js'
 import ControladorEjemplos from './controller/controladorEjemplos.js'
-import ControladorSemantico from './controller/controladorSemantico.js'
+import ControladorSemantico from './controller/semantico.controlador.js'
 
 //Elementos del compilador
 const txtArea = document.getElementById("txtArea")
