@@ -1,45 +1,47 @@
 <%-include ('components/header.ejs') %>
 
-<div class="contenedor">
+    <div class="contenedor">
 
-    <div class="contenedor__menu">
-        <%-include ('components/menu.ejs') %>
-    </div>
-
-    <div class="contenedor__form">
-        <div class="contenedor">
-            <%-include ('components/lineas.ejs') %>
-            <%-include ('components/form.ejs') %>
+        <div class="contenedor__menu">
+            <%-include ('components/menu.ejs') %>
         </div>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light nav_menu">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-
-                <li class="nav-item active">
-                    <button class="btn btn-light" id="btnLexico">Léxico</button>
-                </li>
-
-                <li class="nav-item active">
-                    <button class="btn btn-light txtnegro" id="btnSintactico">Problemas</button>
-                </li>
-
-                </ul>
+        <div class="contenedor__form">
+            <div class="contenedor">
+                <%-include ('components/lineas.ejs') %>
+                    <%-include ('components/form.ejs') %>
             </div>
-        </nav>
 
-        <div class="menu_terminal">
-            <%-include ('components/sintactico.ejs') %>
-            <%-include ('components/table.ejs') %>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light nav_menu">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+
+                        <li class="nav-item active">
+                            <button class="btn btn-light" id="btnLexico">Léxico</button>
+                        </li>
+
+                        <li class="nav-item active">
+                            <button class="btn btn-light txtnegro" id="btnSintactico">Problemas</button>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="menu_terminal">
+                <%-include ('components/sintactico.ejs') %>
+                    <%-include ('components/table.ejs') %>
+            </div>
+
+            <%-include ('components/form2.ejs') %>
+
         </div>
-        
+
     </div>
 
-</div>
-
-<div class="contenedor">
+    <div class="contenedor">
 
 
-</div>
+    </div>
 
-<%-include ('components/footer.ejs') %>
+    <%-include ('components/footer.ejs') %>

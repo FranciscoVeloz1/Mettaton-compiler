@@ -11,6 +11,8 @@ const btnCompilar = document.getElementById("btnCompilar")
 const btnLexico = document.getElementById("btnLexico")
 const btnSintactico = document.getElementById("btnSintactico")
 
+const txtArea2 = document.getElementById('txtArea2')
+
 //Botones de ejemplos
 const btnCondicional = document.getElementById("Condicional")
 const btnMetodos = document.getElementById("Metodos")
@@ -79,4 +81,12 @@ btnFunciones.addEventListener('click', () => {
 
 btnTiempo.addEventListener('click', () => {
     txtArea.value = ejemplos.EjemploTiempo()
+})
+
+document.getElementById('btnGuardar').addEventListener('click', () => {
+    let blob = new Blob([txtArea2.value], {
+        type: 'text/plain;charset=utf-8'
+    });
+
+    saveAs(blob, 'archivo.sh')
 })
