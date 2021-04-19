@@ -1,5 +1,5 @@
 const fs = require('fs')
-const file = fs.createWriteStream('./archivo.ino')
+const excec = require('child_process').exec
 
 class Controller {
 
@@ -9,9 +9,26 @@ class Controller {
 
     GetCode(req, res) {
         let tokens = req.body
-        file.write(tokens.token)
-        file.end()
-        console.log('Archivo generado')
+        let arduwin = 'ArduinoUploader.exe archivo.ino 13 COM3'
+
+        fs.writeFile('./archivo.ino', tokens.token, 'utf8', error => {
+            if (error) throw error;
+            console.log('Archivo generado')
+        })
+
+        fs.writeFile('./start.bat', arduwin, 'utf8', error => {
+            if (error) throw error;
+            console.log('Bat generado')
+        })
+
+        excec('start.bat', (err, stdout) => {
+            if (err) {
+                throw err
+            }
+
+            console.log('comando ejecutado')
+            console.log(stdout)
+        })
 
         res.json({
             message: 'correcto'

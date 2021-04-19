@@ -57,13 +57,12 @@ class Loop {
         return body
     }
 
-
     //Llave final
     TraductoLlaveFinal(lexico) {
         let result = ''
 
         if (lexico[lexico.length - 1] == '}') {
-            result = '}\nc++;\n}'
+            result = 'c++;\n}\n}'
         }
         return result
     }
