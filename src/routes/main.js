@@ -9,6 +9,7 @@ class IndexRouter {
 
     Config() {
         this.router.get('/', template.List)
+        this.router.post('/code', template.GetCode)
     }
 }
 

@@ -29,17 +29,15 @@ class ControladorEjemplos {
 	EjemploEstructuras() {
 		return `task main()
 {
-  const boton = new Sensor(4)
-  const motor1 = new Motor(5)
+  const motor = new Motor(5)
 
   var velocidad = 127
   var mensaje = 'Mensaje'
 
-  while (boton)
+  while (true)
   {
     motor.run (255)
   }
-  motor.run (0)
 }`
 	}
 
@@ -58,13 +56,13 @@ class ControladorEjemplos {
     {
       relay1.on
       servo1.position (180)
-      motor.run (255)
+      motor1.run (255)
     }
     else
     {
       relay1.off
       servo1.position (0)
-      motor.run (0)
+      motor1.run (0)
     }
   }
 }`
@@ -99,9 +97,6 @@ class ControladorEjemplos {
 
   while (true)
   {
-    motor.run (255)
-    wait1msec (1000)
-
     motor.run (255)
     wait1msec (1000)
 

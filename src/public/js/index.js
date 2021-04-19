@@ -3,6 +3,7 @@ import ControladorLexico from './controller/controladorLexico.js'
 import ControladorSintactico from './sintactico/sintactico.controlador.js'
 import ControladorEjemplos from './controller/controladorEjemplos.js'
 import ControladorSemantico from './controller/semantico.controlador.js'
+import ControladorTraductor from './controller/traductor.controlador.js'
 
 //Elementos del compilador
 const txtArea = document.getElementById("txtArea")
@@ -26,6 +27,7 @@ const lexico = new ControladorLexico()
 const sintactico = new ControladorSintactico()
 const semantico = new ControladorSemantico()
 const ejemplos = new ControladorEjemplos()
+const traductor = new ControladorTraductor()
 
 let coleccion = []
 
@@ -60,6 +62,10 @@ btnCompilar.addEventListener('click', () => {
     if (sintactico.EjecutarSintactico(coleccion) == 'Ningun problema ha sido detectado') {
         lblproblemas.innerHTML = semantico.Semantico(lexico.arreglo, coleccion)
         conIndex.Errores(lblproblemas, 'btnSintactico')
+
+        if (semantico.Semantico(lexico.arreglo, coleccion) == 'Ningun problema ha sido detectado') {
+            txtArea2.value = traductor.Traductor(coleccion, lexico.arreglo)
+        }
     }
 })
 
@@ -83,10 +89,17 @@ btnTiempo.addEventListener('click', () => {
     txtArea.value = ejemplos.EjemploTiempo()
 })
 
-document.getElementById('btnGuardar').addEventListener('click', () => {
-    let blob = new Blob([txtArea2.value], {
-        type: 'text/plain;charset=utf-8'
-    });
+document.getElementById('btnGuardar').addEventListener('click', async () => {
+    let objeto = {
+        token: txtArea2.value
+    }
 
-    saveAs(blob, 'archivo.sh')
+    const response = await fetch('http://localhost:4000/code', {
+        method: 'POST',
+        body: JSON.stringify(objeto),
+        headers: {
+            "Content-type": "application/json"
+        }
+    });
+    const result = await response.json()
 })
