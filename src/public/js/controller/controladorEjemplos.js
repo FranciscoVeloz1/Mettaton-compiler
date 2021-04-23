@@ -97,10 +97,10 @@ class ControladorEjemplos {
 
   while (true)
   {
-    motor.run (255)
+    motor1.run (255)
     wait1msec (1000)
 
-    motor.run (0)
+    motor1.run (0)
     wait1msec (1000)
   }
 }`

@@ -31,7 +31,7 @@ class Loop {
         return identificador
     }
 
-    TraductorBody(coleccion) {
+    TraductorMotor(coleccion) {
         let body = ''
         for (let i = 0; i < coleccion.length; i++) {
 
@@ -47,12 +47,46 @@ class Loop {
                         if (coleccion[i + 1].descripcion !== 'Metodo tiempo') {
                             body += `analogWrite(${inst.port}, ${vel});\n`
                         } else {
-                            let time = coleccion[i+1].token.trim().split(' ')[1].split(/[()]/)[1]
+                            let time = coleccion[i + 1].token.trim().split(' ')[1].split(/[()]/)[1]
                             body += `analogWrite(${inst.port}, ${vel});\ndelay(${time});\n`
                         }
                     }
                 }
             }
+        }
+        return body
+    }
+
+    TraductorRelay(coleccion) {
+        let body = ''
+
+        for (let i = 0; i < coleccion.length; i++) {
+            if (coleccion[i].descripcion == 'Metodo relay') {
+                let iden = coleccion[i].token.trim().split('.')[0]
+                let estado = coleccion[i].token.trim().split('.')[1]
+                let instancias = this.Identificadores(coleccion)
+
+                for (let j = 0; j < instancias.length; j++) {
+                    const inst = instancias[j];
+                    if (iden == inst.tok) {
+                        if (coleccion[i + 1].descripcion !== 'Metodo tiempo') {
+                            if (estado == 'on') {
+                                body += `digitalWrite(${inst.port}, 1);\n`
+                            } else {
+                                body += `digitalWrite(${inst.port}, 0);\n`
+                            }
+                        } else {
+                            let time = coleccion[i + 1].token.trim().split(' ')[1].split(/[()]/)[1]
+                            if (estado == 'on') {
+                                body += `digitalWrite(${inst.port}, 1);\ndelay(${time});\n`
+                            } else {
+                                body += `digitalWrite(${inst.port}, 0);\ndelay(${time});\n`
+                            }
+                        }
+                    }
+                }
+            }
+
         }
         return body
     }
@@ -68,10 +102,7 @@ class Loop {
     }
 
     VoidLoop(lexico, coleccion) {
-        this.TraductorBody(coleccion)
-        // this.Identificadores(coleccion)
-
-        let loop = `${this.TraductorLoop(coleccion)}${this.TraductorBody(coleccion)}${this.TraductoLlaveFinal(lexico)}`
+        let loop = `${this.TraductorLoop(coleccion)}${this.TraductorMotor(coleccion)}${this.TraductorRelay(coleccion)}${this.TraductoLlaveFinal(lexico)}`
         return loop
     }
 }

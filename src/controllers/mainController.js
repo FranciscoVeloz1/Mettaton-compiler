@@ -8,10 +8,11 @@ class Controller {
     }
 
     GetCode(req, res) {
-        let tokens = req.body
-        let arduwin = 'ArduinoUploader.exe archivo.ino 13 COM3'
+        let { token, port, placa } = req.body
+        console.log(req.body)
+        let arduwin = `ArduinoUploader.exe archivo.ino ${placa} ${port}`
 
-        fs.writeFile('./archivo.ino', tokens.token, 'utf8', error => {
+        fs.writeFile('./archivo.ino', token, 'utf8', error => {
             if (error) throw error;
             console.log('Archivo generado')
         })
@@ -22,12 +23,12 @@ class Controller {
         })
 
         excec('start.bat', (err, stdout) => {
-            if (err) {
-                throw err
+            try {
+                console.log('comando ejecutado')
+                console.log(stdout)
+            } catch (error) {
+                console.log('Error al subir el archivo')
             }
-
-            console.log('comando ejecutado')
-            console.log(stdout)
         })
 
         res.json({

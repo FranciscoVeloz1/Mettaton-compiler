@@ -14,6 +14,9 @@ const btnSintactico = document.getElementById("btnSintactico")
 
 const txtArea2 = document.getElementById('txtArea2')
 
+const port = document.getElementById('ardu_port')
+const placa = document.getElementById('placa')
+
 //Botones de ejemplos
 const btnCondicional = document.getElementById("Condicional")
 const btnMetodos = document.getElementById("Metodos")
@@ -91,7 +94,9 @@ btnTiempo.addEventListener('click', () => {
 
 document.getElementById('btnGuardar').addEventListener('click', async () => {
     let objeto = {
-        token: txtArea2.value
+        token: txtArea2.value,
+        port: port.value,
+        placa: placa.value
     }
 
     const response = await fetch('http://localhost:4000/code', {
